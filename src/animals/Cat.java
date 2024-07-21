@@ -1,0 +1,77 @@
+package animals;
+
+import olympics.Medal;
+
+import java.awt.*;
+import java.util.ArrayList;
+
+/**
+ * Class representing a cat.
+ * Extends the TerrestrialAnimals class and adds the castrated property specific to cats.
+ */
+public class Cat extends TerrestrialAnimals{
+    private final boolean castrated;
+    
+    /**
+     * Default constructor for Cat.
+     * Initializes with default values and sets castrated to false.
+     */
+    public Cat(){
+        super();
+        this.castrated = false;
+    }
+    
+    /**
+     * Constructs a Cat with specified properties.
+     *
+     * @param name The name of the cat.
+     * @param gender The gender of the cat.
+     * @param weight The weight of the cat.
+     * @param speed The speed of the cat.
+     * @param medals An array of medals won by the cat.
+     * @param noLegs The number of legs the cat has.
+     * @param castrated Indicates whether the cat is castrated.
+     */
+    public Cat(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size, int maxEnergy,
+               int energyPerMeter, Orientation orien, int noLegs, boolean castrated){
+        super(name, gender, weight, speed, medals,id,size,maxEnergy,energyPerMeter,orien, noLegs);
+        this.castrated = castrated;
+    }
+    
+    /**
+     * Checks if this cat is equal to another object.
+     *
+     * @param obj The object to compare to.
+     * @return True if the objects are equal, false otherwise.
+     */
+    public boolean equals(Object obj) {
+        boolean ans = false;
+        if (obj instanceof Cat){
+            if (super.equals(obj)){
+                ans = this.castrated == (((Cat)obj).castrated);
+            }
+        }
+        return ans;
+    }
+    
+    /**
+     * Returns a string representation of the cat.
+     *
+     * @return A string representation of the cat including whether it is castrated.
+     */
+    public String toString() {
+        return super.toString() + ". Castrated: " + this.castrated ;
+    }
+
+    /**
+     * Returns the sound made by the cat.
+     *
+     * @return A string representing the sound made by the cat.
+     */
+    protected String speak() {
+        return "Meow";
+    }
+    public void drewObject(Graphics g) {
+
+    }
+}
