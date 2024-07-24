@@ -19,6 +19,7 @@ public class Whale extends WaterAnimal {
     public Whale(){
         super();
         this.foodType = "fish";
+        setImgs();
     }
     
     /**
@@ -36,8 +37,13 @@ public class Whale extends WaterAnimal {
                  int energyPerMeter, Orientation orien, double diveDept, String foodType){
         super(name, gender, weight, speed,medals,id,size,maxEnergy,energyPerMeter,orien, diveDept);
         this.foodType = foodType;
+        setImgs();
     }
-    
+
+    private void setImgs() {
+        setImgs("whale2");
+    }
+
     /**
      * Checks if this whale is equal to another object.
      *

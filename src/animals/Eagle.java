@@ -21,6 +21,7 @@ public class Eagle extends AirAnimal{
     public Eagle(){
         super();
         this.altitudeOfFlight = 30.50;
+        setImgs();
     }
     
     /**
@@ -38,8 +39,13 @@ public class Eagle extends AirAnimal{
                  int energyPerMeter, Orientation orien, double wingspan, double altitudeOfFlight){
         super(name, gender, weight, speed,medals,id,size,maxEnergy,energyPerMeter,orien, wingspan);
         this.altitudeOfFlight = altitudeOfFlight;
+        setImgs();
     }
-    
+
+    private void setImgs() {
+        setImgs("eagle3");
+    }
+
     /**
      * Checks if this eagle is equal to another object.
      *

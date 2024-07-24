@@ -20,6 +20,7 @@ public class Dog extends TerrestrialAnimals{
     public Dog(){
         super();
         this.breed = "Pitbull";
+        setImgs();
     }
     
     /**
@@ -37,8 +38,12 @@ public class Dog extends TerrestrialAnimals{
                int maxEnergy, int energyPerMeter , Orientation orien, int noLegs, String breed){
         super(name,gender,weight,speed,medals,id,size,maxEnergy,energyPerMeter,orien, noLegs);
         this.breed = breed;
+        setImgs();
     }
-    
+    private void setImgs(){
+        setImgs("dog2E","dog2S","dog2W","dog2N");
+    }
+
     /**
      * Checks if this dog is equal to another object.
      *

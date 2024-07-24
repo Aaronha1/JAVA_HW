@@ -3,16 +3,22 @@
 
 package animals;
 
+
 import graphics.CompetitionPanel;
 import graphics.IDrawable;
 import graphics.IMoveable;
+import graphics.Image;
 import mobility.ILocatable;
 import mobility.Mobile;
 import mobility.Point;
 import olympics.Medal;
+
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.File;
 
 
 public abstract class Animal extends Mobile implements ILocatable, IDrawable,Cloneable, IAnimal {
@@ -30,6 +36,7 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable,Clo
 
     private int maxEnergy;
     private int energyPerMeter;
+    private int energy;
     private CompetitionPanel pan;
     protected BufferedImage img1, img2, img3, img4;
 
@@ -154,4 +161,13 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable,Clo
         return false;
     }
 
+    protected BufferedImage Img(String imgName) {
+        try {
+            String path = Image.file(imgName);
+            return ImageIO.read(new File(path));
+        } catch (IOException e) {
+            System.out.println("Cannot load image");
+            return null;
+        }
+    }
 }

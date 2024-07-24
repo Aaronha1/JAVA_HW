@@ -23,6 +23,7 @@ public class Alligator extends WaterAnimal implements IReptile,IWaterAnimal,ITer
         waterAnimal = new WaterAnimal();
         terrestrialAnimals = new TerrestrialAnimals();
         this.AreaOfLiving = "River";
+        setImgs();
     }
     
     /**
@@ -44,8 +45,24 @@ public class Alligator extends WaterAnimal implements IReptile,IWaterAnimal,ITer
         this.terrestrialAnimals = new TerrestrialAnimals(name,gender,weight,speed,medals,id,size,maxEnergy,
                 energyPerMeter,orien, noLegs);
         this.AreaOfLiving = areaOfLiving;
+        setImgs();
     }
-    
+
+    private void setImgs(){
+        if ("River".equals(AreaOfLiving)){
+            setImgs("alligator3");
+        } else {
+            setImgs("alligator2E", "alligator2S", "alligator2W", "alligator2N");
+        }
+    }
+
+    public void setImgs(String e,String s,String w,String n){
+        img1 = Img(e);
+        img2 = Img(s);
+        img3 = Img(w);
+        img4 = Img(n);
+    }
+
     /**
      * Checks if this alligator is equal to another object.
      * 

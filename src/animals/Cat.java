@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class Cat extends TerrestrialAnimals{
     private final boolean castrated;
+
     
     /**
      * Default constructor for Cat.
@@ -19,6 +20,8 @@ public class Cat extends TerrestrialAnimals{
     public Cat(){
         super();
         this.castrated = false;
+        setImgs();
+
     }
     
     /**
@@ -36,7 +39,13 @@ public class Cat extends TerrestrialAnimals{
                int energyPerMeter, Orientation orien, int noLegs, boolean castrated){
         super(name, gender, weight, speed, medals,id,size,maxEnergy,energyPerMeter,orien, noLegs);
         this.castrated = castrated;
+        setImgs();
     }
+
+    private void setImgs(){
+        setImgs("cat2E","cat2S","cat2W","cat2N");
+    }
+
     
     /**
      * Checks if this cat is equal to another object.

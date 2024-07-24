@@ -32,6 +32,8 @@ public class CompetitionFrame extends JFrame {
         competitionPanel = new CompetitionPanel();
         add(competitionPanel,BorderLayout.AFTER_LAST_LINE);
 
+        setPreferredSize(new Dimension(800, 600));
+
         pack();
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -38,6 +38,13 @@ public class TerrestrialAnimals extends Animal implements ITerrestrialAnimals {
         super(name,gender,weight,speed,new Point(0,0),medals,id,size,maxEnergy,energyPerMeter,orien);
         this.noLegs = noLegs;
     }
+
+    public void setImgs(String e,String s,String w,String n){
+        img1 = Img(e);
+        img2 = Img(s);
+        img3 = Img(w);
+        img4 = Img(n);
+    }
     
     /**
      * Checks if this terrestrial animal is equal to another object.

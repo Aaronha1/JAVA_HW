@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BackGroundPanel extends JPanel {
-    private final Image image = new ImageIcon(getClass().getResource("graphics2/competitionBackground.png")).getImage();
+    private final java.awt.Image image = new ImageIcon(getClass().getResource(Image.file("competitionBackground"))).getImage();
 
 
     protected void paintComponent(Graphics g) {

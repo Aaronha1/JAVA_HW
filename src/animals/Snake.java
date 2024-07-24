@@ -41,7 +41,11 @@ public class Snake extends TerrestrialAnimals implements IReptile{
         this.length = length;
         this.poisonous = poisonous;
     }
-    
+
+    private void setImgs() {
+        setImgs("snake2E","snake2S","snake2W","snake2N");
+    }
+
     /**
      * Checks if this snake is equal to another object.
      *

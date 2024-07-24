@@ -19,6 +19,7 @@ public class Pigeon extends AirAnimal{
     public Pigeon(){
         super();
         this.family = "columbinae";
+        setImgs();
     }
     
     /**
@@ -36,8 +37,13 @@ public class Pigeon extends AirAnimal{
                   int maxEnergy, int energyPerMeter, Orientation orien, double wingspan, String family){
         super(name, gender, weight, speed,medals,id,size,maxEnergy,energyPerMeter,orien, wingspan);
         this.family = family;
+        setImgs();
     }
-    
+
+    private void setImgs() {
+        setImgs("pigeon");
+    }
+
     /**
      * Checks if this pigeon is equal to another object.
      *

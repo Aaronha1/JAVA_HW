@@ -40,6 +40,10 @@ public class WaterAnimal extends Animal implements IWaterAnimal{
         this.diveDept = -200;
     }
 
+    public void setImgs(String img){
+        img1 = Img(img);
+    }
+
     /**
      * Checks if this water animal is equal to another object.
      *

@@ -22,6 +22,7 @@ public class Dolphin extends WaterAnimal{
     public Dolphin(){
         super();
         this.waterType = WaterType.SEA;
+        setImgs();
     }
     /**
      * Constructs a Dolphin with specified properties.
@@ -38,8 +39,13 @@ public class Dolphin extends WaterAnimal{
                    int energyPerMeter, Orientation orien, double diveDept, WaterType waterType){
         super(name, gender, weight, speed,medals,id,size,maxEnergy,energyPerMeter,orien, diveDept);
         this.waterType = waterType;
+        setImgs();
     }
-    
+
+    private void setImgs() {
+        setImgs("dolphin1");
+    }
+
     /**
      * Checks if this dolphin is equal to another object.
      *

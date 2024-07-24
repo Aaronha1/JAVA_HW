@@ -39,6 +39,10 @@ public class AirAnimal extends Animal implements IAirAnimal{
         this.wingspan = 1.5;
     }
 
+    public void setImgs(String img){
+        img1 = Img(img);
+    }
+
 
     /**
      * Returns a string representation of the air animal.
