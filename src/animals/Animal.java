@@ -48,7 +48,7 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
         this.id = id;
         this.maxEnergy = maxEnergy;
         this.energyPerMeter = energyPerMeter;
-        this.orien = orien;
+        this.orien = Orientation.EAST;//orien;
         this.energyAmount = 0;
         this.energyConsumption = 0;
         setImgs();

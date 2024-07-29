@@ -65,13 +65,13 @@ public class Alligator extends WaterAnimal implements IReptile,IWaterAnimal,ITer
             }
         } else {
             if (x == 0 && y == 0) {
-                changeDirection(Orientation.SOUTH);
-            } else if (x == 0 && y == my) {
                 changeDirection(Orientation.EAST);
-            } else if (x == mx && y == 0) {
-                changeDirection(Orientation.WEST);
-            } else if (x == mx && y == my) {
+            } else if (x == 0 && y == my) {
                 changeDirection(Orientation.NORTH);
+            } else if (x == mx && y == 0) {
+                changeDirection(Orientation.SOUTH);
+            } else if (x == mx && y == my) {
+                changeDirection(Orientation.WEST);
             }
         }
     }

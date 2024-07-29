@@ -28,16 +28,7 @@ public class AddAnimalDialog extends JDialog {
             add(button[i]);
             button[i].addActionListener(e -> addAnimal(aType));
         }
-        /*
-        button[0].addActionListener(e -> addAnimal(animalsType[0],animals));
-        button[1].addActionListener(e -> addAnimal(animalsType[1],animals));
-        button[2].addActionListener(e -> addAnimal(animalsType[2],animals));
-        button[3].addActionListener(e -> addAnimal(animalsType[3],animals));
-        button[4].addActionListener(e -> addAnimal(animalsType[4],animals));
-        button[5].addActionListener(e -> addAnimal(animalsType[5],animals));
-        button[6].addActionListener(e -> addAnimal(animalsType[6],animals));
-        button[7].addActionListener(e -> addAnimal(animalsType[7],animals));
-        */
+
 
         setSize(400, 300);
         setLocationRelativeTo(owner);

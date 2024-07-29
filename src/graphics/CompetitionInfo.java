@@ -91,28 +91,11 @@ public class CompetitionInfo {
         return CompetitionCategory;
     }
 
-    private static void checkADel(String categ) {
-        if (allAnimals.isEmpty()) return;
-
-        Class<? extends Animal> testClass;
-        switch (categ) {
-            case "Air" -> testClass = AirAnimal.class;
-            case "Water" -> testClass = WaterAnimal.class;
-            case "Terrestrial" -> testClass = TerrestrialAnimals.class;
-            default -> { return; }
-        }
-
-        for (CompetitionInfo info : allAnimals) {
-            if (info.display && !testClass.isInstance(info.animal)) {
-                info.display = false;
-            }
-        }
-    }
     public static void setCategory(String categ) {
         MAX_RUNNERS = switch (categ) {
             case "Air" -> 5;
             case "Water" -> 4;
-            case "Terrestrial" -> 3;
+            case "Terrestrial" -> 30;
             default -> 0;
         };
         CompetitionCategory = categ;
@@ -120,10 +103,12 @@ public class CompetitionInfo {
         if (!getDisplayedAnimals().isEmpty()) {
             for (CompetitionInfo info : allAnimals) {
                 if (info.display) {
+                    info.display = false;
                     for (String s: listAnimals()) {
                         if (s.equals(info.type)) {
                             info.animal.setPosition(getPosition());
                             info.category = categ;
+                            info.display = true;
                             numRuns++;
                         }
                     }
@@ -213,8 +198,11 @@ public class CompetitionInfo {
             String input = JOptionPane.showInputDialog("Enter the amount of food:");
             try {
                 int foodAmount = Integer.parseInt(input);
-                info.animal.eat(foodAmount);
-                JOptionPane.showMessageDialog(null, "Animal fed successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                if (info.animal.eat(foodAmount)) {
+                    JOptionPane.showMessageDialog(null, "Animal fed successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Food amount must be a positive number.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Invalid input. Please enter a whole number.", "Error", JOptionPane.ERROR_MESSAGE);
             }
