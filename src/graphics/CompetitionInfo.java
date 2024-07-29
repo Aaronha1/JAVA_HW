@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import animals.*;
+import mobility.Point;
 
 public class CompetitionInfo {
     private static String CompetitionCategory = null;
@@ -16,7 +17,8 @@ public class CompetitionInfo {
     private static Timer timer;
 
     private final Animal animal;
-    private final String category, type;
+    private String category;
+    private final String type;
     private boolean display;
 
     private CompetitionInfo(Animal animal, String type){
@@ -32,11 +34,19 @@ public class CompetitionInfo {
     }
 
 
+    public static Point getPosition() {
+        return switch (getCategory()) {
+            case "Air" -> new Point(0,560*numRuns/MAX_RUNNERS);
+            case "Water" -> new Point(20,460*numRuns/MAX_RUNNERS+60);
+            case "Terrestrial" -> new Point(0,0);
+            default -> new Point();
+        };
+    }
     public static void printArr() {
         String[] columnNames = {"Animal", "Category", "Type", "Speed", "Energy Amount", "Distance", "Energy Consumption"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
-        timer = new Timer(1000, e -> {
+        timer = new Timer(200, e -> {
             model.setRowCount(0);
             for (CompetitionInfo info : allAnimals) {
                 Object[] row = {
@@ -81,17 +91,24 @@ public class CompetitionInfo {
         return CompetitionCategory;
     }
 
-    private static void checkADel(String categ){
+    private static void checkADel(String categ) {
         if (allAnimals.isEmpty()) return;
+
+        Class<? extends Animal> testClass;
+        switch (categ) {
+            case "Air" -> testClass = AirAnimal.class;
+            case "Water" -> testClass = WaterAnimal.class;
+            case "Terrestrial" -> testClass = TerrestrialAnimals.class;
+            default -> { return; }
+        }
+
         for (CompetitionInfo info : allAnimals) {
-            if (!Objects.equals(info.category, categ)) {
+            if (info.display && !testClass.isInstance(info.animal)) {
                 info.display = false;
-                numRuns--;
             }
         }
     }
     public static void setCategory(String categ) {
-        if (!Objects.equals(getCategory(), categ)) checkADel(categ);
         MAX_RUNNERS = switch (categ) {
             case "Air" -> 5;
             case "Water" -> 4;
@@ -99,6 +116,20 @@ public class CompetitionInfo {
             default -> 0;
         };
         CompetitionCategory = categ;
+        numRuns = 0;
+        if (!getDisplayedAnimals().isEmpty()) {
+            for (CompetitionInfo info : allAnimals) {
+                if (info.display) {
+                    for (String s: listAnimals()) {
+                        if (s.equals(info.type)) {
+                            info.animal.setPosition(getPosition());
+                            info.category = categ;
+                            numRuns++;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static String[] listAnimals(){

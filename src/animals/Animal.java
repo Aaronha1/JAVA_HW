@@ -92,7 +92,7 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
         System.out.println("Animal " + getAnimalName() + " said " + speak());
     }
 
-    protected void setPosition(Point p) {
+    public void setPosition(Point p) {
         this.location = new Point(p.getX(), p.getY());
     }
 
@@ -135,7 +135,6 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
             System.out.println("Cannot load image: " + nm);
             e.printStackTrace();
         }
-        System.out.println("Image loaded: " + nm);
     }
 
     public BufferedImage getImg(int imgNum) {
@@ -151,18 +150,17 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
 
     public void move() {
         if (energyAmount <= 0) {
-            return; // Animal stops moving when out of energy
+            return;
         }
 
-        // Calculate movement based on speed and direction
         int deltaX = 0, maxX = 800 - size;
-        int deltaY = 0, maxY = 600 - size;
+        int deltaY = 0, maxY = 520 - size;
 
         switch (orien) {
             case EAST -> deltaX = getSpeed();
             case WEST -> deltaX = -getSpeed();
-            case NORTH -> deltaY = getSpeed();
-            case SOUTH -> deltaY = -getSpeed();
+            case NORTH -> deltaY = -getSpeed();
+            case SOUTH -> deltaY = getSpeed();
         }
         int x = location.getX() + deltaX;
         int y = location.getY() + deltaY;
@@ -170,18 +168,8 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
         x = Math.max(0,Math.min(x,maxX));
         y = Math.max(0,Math.min(y,maxY));
 
-        if (x == 0 && y == 0) {
-            changeDirection(Orientation.NORTH);
-        } else if (x == 0 && y == maxY) {
-            changeDirection(Orientation.EAST);
-        } else if (x == maxX && y == 0) {
-            changeDirection(Orientation.WEST);
-        } else if (x == maxX && y == maxY) {
-            changeDirection(Orientation.SOUTH);
-        }
-
+        changeDirection(x,y,maxX,maxY);
         Point newLocation = new Point(x, y);
-
 
         energyAmount -= energyPerMeter;
         if (energyAmount < 0) {
@@ -189,11 +177,12 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
         }
 
         setPosition(newLocation);
-        System.out.println("Animal moved to: " + newLocation + "dictance: " +move(newLocation));
+        move(newLocation);
     }
-    private void changeDirection(Orientation newOrien) {
+    protected void changeDirection(Orientation newOrien) {
         orien = newOrien;
     }
+    abstract protected void changeDirection(int x, int y, int mx, int my);
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
@@ -243,6 +232,5 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
             case WEST -> g.drawImage(img3, location.getX(), location.getY() - size / 10, size * 2, size, pan);
             case NORTH -> g.drawImage(img4, location.getX() - size / 2, location.getY() - size / 10, size, size * 2, pan);
         }
-        System.out.println("Drew animal at: " + location);
     }
 }

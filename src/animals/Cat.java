@@ -1,5 +1,6 @@
 package animals;
 
+import mobility.Point;
 import olympics.Medal;
 
 import java.awt.*;
@@ -32,9 +33,9 @@ public class Cat extends TerrestrialAnimals{
      * @param noLegs The number of legs the cat has.
      * @param castrated Indicates whether the cat is castrated.
      */
-    public Cat(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int maxEnergy,
+    public Cat(String name, Gender gender, double weight, int speed, Point loction, ArrayList<Medal> medals, int id, int maxEnergy,
                int energyPerMeter, Orientation orien, int noLegs, boolean castrated){
-        super(name, gender, weight, speed, medals,id,maxEnergy,energyPerMeter,orien, noLegs);
+        super(name, gender, weight, speed,loction, medals,id,maxEnergy,energyPerMeter,orien, noLegs);
         this.castrated = castrated;
     }
 
@@ -76,7 +77,5 @@ public class Cat extends TerrestrialAnimals{
     protected String speak() {
         return "Meow";
     }
-    public void drewObject(Graphics g) {
 
-    }
 }

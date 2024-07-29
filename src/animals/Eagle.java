@@ -1,5 +1,6 @@
 package animals;
 
+import mobility.Point;
 import olympics.Medal;
 
 import java.awt.*;
@@ -34,9 +35,9 @@ public class Eagle extends AirAnimal{
      * @param wingspan The wingspan of the eagle.
      * @param altitudeOfFlight The altitude at which the eagle flies.
      */
-    public Eagle(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int maxEnergy,
+    public Eagle(String name, Gender gender, double weight, int speed, Point loction, ArrayList<Medal> medals, int id, int maxEnergy,
                  int energyPerMeter, Orientation orien, double wingspan, double altitudeOfFlight){
-        super(name, gender, weight, speed,medals,id,maxEnergy,energyPerMeter,orien, wingspan);
+        super(name, gender, weight, speed,loction,medals,id,maxEnergy,energyPerMeter,orien, wingspan);
         this.altitudeOfFlight = altitudeOfFlight;
     }
 
@@ -86,8 +87,4 @@ public class Eagle extends AirAnimal{
         return MAX_ALTITUDE;
     }
 
-    @Override
-    public void drewObject(Graphics g) {
-
-    }
 }

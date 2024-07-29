@@ -1,5 +1,6 @@
 package animals;
 
+import mobility.Point;
 import olympics.Medal;
 
 import java.awt.*;
@@ -32,9 +33,9 @@ public class Pigeon extends AirAnimal{
      * @param wingspan The wingspan of the pigeon.
      * @param family The family of the pigeon.
      */
-    public Pigeon(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
+    public Pigeon(String name, Gender gender, double weight, int speed, Point loction, ArrayList<Medal> medals, int id,
                   int maxEnergy, int energyPerMeter, Orientation orien, double wingspan, String family){
-        super(name, gender, weight, speed,medals,id,maxEnergy,energyPerMeter,orien, wingspan);
+        super(name, gender, weight, speed,loction,medals,id,maxEnergy,energyPerMeter,orien, wingspan);
         this.family = family;
     }
 

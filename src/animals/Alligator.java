@@ -1,5 +1,7 @@
 package animals;
 
+import graphics.CompetitionInfo;
+import mobility.Point;
 import olympics.Medal;
 
 import java.awt.*;
@@ -36,25 +38,43 @@ public class Alligator extends WaterAnimal implements IReptile,IWaterAnimal,ITer
      * @param diveDept The dive depth of the alligator.
      * @param areaOfLiving The area where the alligator lives.
      */
-    public Alligator(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
+    public Alligator(String name, Gender gender, double weight, int speed, Point loction, ArrayList<Medal> medals, int id,
                      int maxEnergy, int energyPerMeter, Orientation orien, double diveDept, int noLegs,
                      String areaOfLiving){
-        super(name, gender, weight, speed,medals,id,maxEnergy,energyPerMeter,orien, diveDept);
-        this.waterAnimal = new WaterAnimal(name,gender,weight,speed,medals,id,maxEnergy,energyPerMeter, orien, diveDept);
-        this.terrestrialAnimals = new TerrestrialAnimals(name,gender,weight,speed,medals,id,maxEnergy,
+        super(name, gender, weight, speed,loction,medals,id,maxEnergy,energyPerMeter,orien, diveDept);
+        this.waterAnimal = new WaterAnimal(name,gender,weight,speed,loction,medals,id,maxEnergy,energyPerMeter, orien, diveDept);
+        this.terrestrialAnimals = new TerrestrialAnimals(name,gender,weight,speed,loction,medals,id,maxEnergy,
                 energyPerMeter,orien, noLegs);
         this.AreaOfLiving = areaOfLiving;
     }
 
     protected void setImgs(){
-        if ("River".equals(AreaOfLiving)){
+        if ("Water".equals(CompetitionInfo.getCategory())){
             setImgs("alligator3.png");
         } else {
             setImgs("alligator2E.png", "alligator2S.png", "alligator2W.png", "alligator2N.png");
         }
     }
 
-
+    protected void changeDirection(int x, int y, int mx, int my){
+        if ("Water".equals(CompetitionInfo.getCategory())){
+            if (x  < 20){
+                changeDirection(Orientation.EAST);
+            } else if (x > 730) {
+                changeDirection(Orientation.WEST);
+            }
+        } else {
+            if (x == 0 && y == 0) {
+                changeDirection(Orientation.SOUTH);
+            } else if (x == 0 && y == my) {
+                changeDirection(Orientation.EAST);
+            } else if (x == mx && y == 0) {
+                changeDirection(Orientation.WEST);
+            } else if (x == mx && y == my) {
+                changeDirection(Orientation.NORTH);
+            }
+        }
+    }
 
     /**
      * Checks if this alligator is equal to another object.
@@ -108,8 +128,4 @@ public class Alligator extends WaterAnimal implements IReptile,IWaterAnimal,ITer
         return waterAnimal.Dive(dive);
     }
 
-    @Override
-    public void drewObject(Graphics g) {
-
-    }
 }

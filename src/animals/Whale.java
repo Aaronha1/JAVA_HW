@@ -1,5 +1,6 @@
 package animals;
 
+import mobility.Point;
 import olympics.Medal;
 
 import java.awt.*;
@@ -32,9 +33,9 @@ public class Whale extends WaterAnimal {
      * @param diveDept The diving depth capability of the whale.
      * @param foodType The type of food the whale consumes.
      */
-    public Whale(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int maxEnergy,
+    public Whale(String name, Gender gender, double weight, int speed, Point loction, ArrayList<Medal> medals, int id, int maxEnergy,
                  int energyPerMeter, Orientation orien, double diveDept, String foodType){
-        super(name, gender, weight, speed,medals,id,maxEnergy,energyPerMeter,orien, diveDept);
+        super(name, gender, weight, speed,loction,medals,id,maxEnergy,energyPerMeter,orien, diveDept);
         this.foodType = foodType;
     }
 
@@ -74,7 +75,5 @@ public class Whale extends WaterAnimal {
     protected String speak() {
         return "Splash";
     }
-    public void drewObject(Graphics g) {
 
-    }
 }

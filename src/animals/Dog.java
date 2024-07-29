@@ -1,5 +1,6 @@
 package animals;
 
+import mobility.Point;
 import olympics.Medal;
 
 import java.awt.*;
@@ -33,9 +34,9 @@ public class Dog extends TerrestrialAnimals{
      * @param noLegs The number of legs the dog has.
      * @param breed The breed of the dog.
      */
-    public Dog(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
+    public Dog(String name, Gender gender, double weight, int speed, Point loction, ArrayList<Medal> medals, int id,
                int maxEnergy, int energyPerMeter , Orientation orien, int noLegs, String breed){
-        super(name,gender,weight,speed,medals,id,maxEnergy,energyPerMeter,orien, noLegs);
+        super(name,gender,weight,speed,loction,medals,id,maxEnergy,energyPerMeter,orien, noLegs);
         this.breed = breed;
     }
     protected void setImgs(){
@@ -75,7 +76,5 @@ public class Dog extends TerrestrialAnimals{
     protected String speak() {
         return "Woof Woof";
     }
-    public void drewObject(Graphics g) {
 
-    }
 }

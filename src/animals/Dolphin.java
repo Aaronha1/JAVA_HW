@@ -1,5 +1,6 @@
 package animals;
 
+import mobility.Point;
 import olympics.Medal;
 
 import javax.imageio.ImageIO;
@@ -34,9 +35,9 @@ public class Dolphin extends WaterAnimal{
      * @param diveDept The dive depth of the dolphin.
      * @param waterType The type of water the dolphin lives in.
      */
-    public Dolphin(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int maxEnergy,
+    public Dolphin(String name, Gender gender, double weight, int speed, Point loction, ArrayList<Medal> medals, int id, int maxEnergy,
                    int energyPerMeter, Orientation orien, double diveDept, WaterType waterType){
-        super(name, gender, weight, speed,medals,id,maxEnergy,energyPerMeter,orien, diveDept);
+        super(name, gender, weight, speed,loction,medals,id,maxEnergy,energyPerMeter,orien, diveDept);
         this.waterType = waterType;
     }
 

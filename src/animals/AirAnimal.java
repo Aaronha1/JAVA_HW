@@ -23,9 +23,9 @@ public class AirAnimal extends Animal implements IAirAnimal{
      * @param medals An array of medals won by the air animal.
      * @param wingspan The wingspan of the air animal.
      */
-    public AirAnimal(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
+    public AirAnimal(String name, Gender gender, double weight, int speed, Point loction, ArrayList<Medal> medals, int id,
                      int maxEnergy, int energyPerMeter, Orientation orien, double wingspan){
-        super(name,gender,weight,speed, new Point(0,0),medals,id,maxEnergy,energyPerMeter,orien);
+        super(name,gender,weight,speed, loction,medals,id,maxEnergy,energyPerMeter,orien);
         this.wingspan = wingspan;
     }
     
@@ -67,15 +67,18 @@ public class AirAnimal extends Animal implements IAirAnimal{
         return ans;
     }
 
+    protected void changeDirection(int x, int y, int mx, int my){
+        if (x  ==0){
+            changeDirection(Orientation.EAST);
+        } else if (x == mx) {
+            changeDirection(Orientation.WEST);
+        }
+    }
 
     protected String speak() {
         return null;
     }
     protected void setImgs() { }
 
-    @Override
-    public void drewObject(Graphics g) {
-
-    }
 
 }

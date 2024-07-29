@@ -1,5 +1,6 @@
 package animals;
 
+import mobility.Point;
 import olympics.Medal;
 
 import java.awt.*;
@@ -35,9 +36,9 @@ public class Snake extends TerrestrialAnimals implements IReptile{
      * @param length The length of the snake.
      * @param poisonous Indicates whether the snake is poisonous or not.
      */
-    public Snake(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int maxEnergy,
+    public Snake(String name, Gender gender, double weight, int speed, Point loction, ArrayList<Medal> medals, int id, int maxEnergy,
                  int energyPerMeter, Orientation orien, double length, Poisonous poisonous){
-        super(name,gender,weight,speed,medals,id,maxEnergy,energyPerMeter,orien, 0);
+        super(name,gender,weight,speed,loction,medals,id,maxEnergy,energyPerMeter,orien, 0);
         this.length = length;
         this.poisonous = poisonous;
     }
@@ -103,7 +104,5 @@ public class Snake extends TerrestrialAnimals implements IReptile{
     public static double getMaxSpeed(){
         return MAX_SPEED;
     }
-    public void drewObject(Graphics g) {
 
-    }
 }

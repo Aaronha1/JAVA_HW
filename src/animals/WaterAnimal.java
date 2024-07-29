@@ -24,9 +24,9 @@ public class WaterAnimal extends Animal implements IWaterAnimal{
      * @param medals An array of medals won by the water animal.
      * @param diveDept The initial diving depth of the water animal.
      */
-    public WaterAnimal( String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
+    public WaterAnimal( String name, Gender gender, double weight, int speed, Point loction, ArrayList<Medal> medals, int id,
                         int maxEnergy, int energyPerMeter, Orientation orien, double diveDept){
-        super(name,gender,weight,speed,new Point(0,0),medals,id,maxEnergy,energyPerMeter,orien);
+        super(name,gender,weight,speed,loction,medals,id,maxEnergy,energyPerMeter,orien);
         this.diveDept = diveDept;
     }
 
@@ -58,6 +58,14 @@ public class WaterAnimal extends Animal implements IWaterAnimal{
         }
         return ans;
     }
+
+    protected void changeDirection(int x, int y, int mx, int my){
+        if (x  < 20){
+            changeDirection(Orientation.EAST);
+        } else if (x > 730) {
+            changeDirection(Orientation.WEST);
+        }
+    }
     protected String speak() {
         return null;
     }
@@ -86,9 +94,5 @@ public class WaterAnimal extends Animal implements IWaterAnimal{
         return false;
     }
 
-    @Override
-    public void drewObject(Graphics g) {
-
-    }
 
 }

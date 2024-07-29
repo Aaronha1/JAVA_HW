@@ -33,9 +33,9 @@ public class TerrestrialAnimals extends Animal implements ITerrestrialAnimals {
      * @param medals An array of medals won by the terrestrial animal.
      * @param noLegs The number of legs the terrestrial animal has.
      */
-    public TerrestrialAnimals(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
+    public TerrestrialAnimals(String name, Gender gender, double weight, int speed, Point loction, ArrayList<Medal> medals, int id,
                               int maxEnergy, int energyPerMeter, Orientation orien, int noLegs){
-        super(name,gender,weight,speed,new Point(0,0),medals,id,maxEnergy,energyPerMeter,Orientation.NORTH);
+        super(name,gender,weight,speed,loction,medals,id,maxEnergy,energyPerMeter,Orientation.NORTH);
         this.noLegs = noLegs;
     }
 
@@ -74,8 +74,16 @@ public class TerrestrialAnimals extends Animal implements ITerrestrialAnimals {
         return noLegs;
     }
 
-    @Override
-    public void drewObject(Graphics g) {
-
+    protected void changeDirection(int x, int y, int mx, int my) {
+        if (x == 0 && y == 0) {
+            changeDirection(Orientation.SOUTH);
+        } else if (x == 0 && y == my) {
+            changeDirection(Orientation.EAST);
+        } else if (x == mx && y == 0) {
+            changeDirection(Orientation.WEST);
+        } else if (x == mx && y == my) {
+            changeDirection(Orientation.NORTH);
+        }
     }
+
 }
