@@ -21,7 +21,6 @@ public class Eagle extends AirAnimal{
     public Eagle(){
         super();
         this.altitudeOfFlight = 30.50;
-        setImgs();
     }
     
     /**
@@ -35,15 +34,14 @@ public class Eagle extends AirAnimal{
      * @param wingspan The wingspan of the eagle.
      * @param altitudeOfFlight The altitude at which the eagle flies.
      */
-    public Eagle(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size, int maxEnergy,
+    public Eagle(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int maxEnergy,
                  int energyPerMeter, Orientation orien, double wingspan, double altitudeOfFlight){
-        super(name, gender, weight, speed,medals,id,size,maxEnergy,energyPerMeter,orien, wingspan);
+        super(name, gender, weight, speed,medals,id,maxEnergy,energyPerMeter,orien, wingspan);
         this.altitudeOfFlight = altitudeOfFlight;
-        setImgs();
     }
 
-    private void setImgs() {
-        setImgs("eagle3");
+    protected void setImgs() {
+        setImgs("eagle3.png");
     }
 
     /**

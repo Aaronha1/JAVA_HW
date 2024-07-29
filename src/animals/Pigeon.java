@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Pigeon extends AirAnimal{
     private final String family;
-    
+
     /**
      * Default constructor for Pigeon.
      * Initializes with default values and sets the family to "columbinae".
@@ -19,9 +19,8 @@ public class Pigeon extends AirAnimal{
     public Pigeon(){
         super();
         this.family = "columbinae";
-        setImgs();
     }
-    
+
     /**
      * Constructs a Pigeon with specified properties.
      *
@@ -33,15 +32,14 @@ public class Pigeon extends AirAnimal{
      * @param wingspan The wingspan of the pigeon.
      * @param family The family of the pigeon.
      */
-    public Pigeon(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size,
+    public Pigeon(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
                   int maxEnergy, int energyPerMeter, Orientation orien, double wingspan, String family){
-        super(name, gender, weight, speed,medals,id,size,maxEnergy,energyPerMeter,orien, wingspan);
+        super(name, gender, weight, speed,medals,id,maxEnergy,energyPerMeter,orien, wingspan);
         this.family = family;
-        setImgs();
     }
 
-    private void setImgs() {
-        setImgs("pigeon");
+    protected void setImgs() {
+        setImgs("pigeon.png");
     }
 
     /**
@@ -77,8 +75,8 @@ public class Pigeon extends AirAnimal{
         return "Arr-rar-rar-rar-raah";
     }
 
-    @Override
-    public void drewObject(Graphics g) {
 
-    }
+//    public void drewObject(Graphics g) {
+//
+//    }
 }

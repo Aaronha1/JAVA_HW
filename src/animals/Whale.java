@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Whale extends WaterAnimal {
     private final String foodType;
-    
+
     /**
      * Default constructor for Whale.
      * Initializes with default values: food type "fish".
@@ -19,9 +19,8 @@ public class Whale extends WaterAnimal {
     public Whale(){
         super();
         this.foodType = "fish";
-        setImgs();
     }
-    
+
     /**
      * Constructs a Whale with specified properties.
      *
@@ -33,15 +32,14 @@ public class Whale extends WaterAnimal {
      * @param diveDept The diving depth capability of the whale.
      * @param foodType The type of food the whale consumes.
      */
-    public Whale(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size, int maxEnergy,
+    public Whale(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int maxEnergy,
                  int energyPerMeter, Orientation orien, double diveDept, String foodType){
-        super(name, gender, weight, speed,medals,id,size,maxEnergy,energyPerMeter,orien, diveDept);
+        super(name, gender, weight, speed,medals,id,maxEnergy,energyPerMeter,orien, diveDept);
         this.foodType = foodType;
-        setImgs();
     }
 
-    private void setImgs() {
-        setImgs("whale2");
+    protected void setImgs() {
+        setImgs("whale2.png");
     }
 
     /**

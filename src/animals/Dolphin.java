@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Dolphin extends WaterAnimal{
     private final WaterType waterType;
-    
+
     /**
      * Default constructor for Dolphin.
      * Initializes with default values and sets the water type to SEA.
@@ -22,7 +22,6 @@ public class Dolphin extends WaterAnimal{
     public Dolphin(){
         super();
         this.waterType = WaterType.SEA;
-        setImgs();
     }
     /**
      * Constructs a Dolphin with specified properties.
@@ -35,15 +34,14 @@ public class Dolphin extends WaterAnimal{
      * @param diveDept The dive depth of the dolphin.
      * @param waterType The type of water the dolphin lives in.
      */
-    public Dolphin(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size, int maxEnergy,
+    public Dolphin(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int maxEnergy,
                    int energyPerMeter, Orientation orien, double diveDept, WaterType waterType){
-        super(name, gender, weight, speed,medals,id,size,maxEnergy,energyPerMeter,orien, diveDept);
+        super(name, gender, weight, speed,medals,id,maxEnergy,energyPerMeter,orien, diveDept);
         this.waterType = waterType;
-        setImgs();
     }
 
-    private void setImgs() {
-        setImgs("dolphin1");
+    protected void setImgs() {
+        setImgs("dolphin1.png");
     }
 
     /**
@@ -78,12 +76,12 @@ public class Dolphin extends WaterAnimal{
     protected String speak() {
         return "Click-click";
     }
-    public void drewObject(Graphics g) {
-        try {
-            img1 = ImageIO.read(new File(PICTURE_PATH + "dolphin1.png" ));
-        }
-        catch (IOException e){
-            System.out.println("Cannot load image");
-        }
-    }
+//    public void drewObject(Graphics g) {
+//        try {
+//            img1 = ImageIO.read(new File(PICTURE_PATH + "dolphin1.png" ));
+//        }
+//        catch (IOException e){
+//            System.out.println("Cannot load image");
+//        }
+//    }
 }

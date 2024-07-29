@@ -12,11 +12,9 @@ public class CompetitionPanel extends JPanel {
     private JButton[] button;
     private AddCompetitionDialog addCompetitionDialog;
     private AddAnimalDialog addAnimalDialog;
-    private final ArrayList<Animal> animals;
     public CompetitionPanel(){
 
         JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(CompetitionPanel.this);
-        this.animals = new ArrayList<>();
         button = new JButton[6];
 
         setLayout(new GridLayout(1,6));
@@ -43,7 +41,25 @@ public class CompetitionPanel extends JPanel {
         button[1].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addAnimalDialog = new AddAnimalDialog(owner,animals);
+                addAnimalDialog = new AddAnimalDialog(owner);
+            }
+        });
+        button[2].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CompetitionInfo.clearSelectedAnimal();
+            }
+        });
+        button[3].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CompetitionInfo.feedAnimal();
+            }
+        });
+        button[4].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CompetitionInfo.printArr();
             }
         });
 

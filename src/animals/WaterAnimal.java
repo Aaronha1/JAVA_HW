@@ -24,25 +24,24 @@ public class WaterAnimal extends Animal implements IWaterAnimal{
      * @param medals An array of medals won by the water animal.
      * @param diveDept The initial diving depth of the water animal.
      */
-    public WaterAnimal(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size,
-                       int maxEnergy, int energyPerMeter, Orientation orien, double diveDept){
-        super(name,gender,weight,speed,new Point(50,0),medals,id,size,maxEnergy,energyPerMeter,orien);
+    public WaterAnimal( String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
+                        int maxEnergy, int energyPerMeter, Orientation orien, double diveDept){
+        super(name,gender,weight,speed,new Point(0,0),medals,id,maxEnergy,energyPerMeter,orien);
         this.diveDept = diveDept;
     }
-    
+
+
     /**
      * Default constructor for WaterAnimal.
      * Initializes with default values: position (50,0) and initial diving depth -200.
      */
     public WaterAnimal(){
         super();
-        this.setPosition(new Point(50,0));
+        this.setPosition(new Point(0,0));
         this.diveDept = -200;
     }
 
-    public void setImgs(String img){
-        img1 = Img(img);
-    }
+
 
     /**
      * Checks if this water animal is equal to another object.
@@ -62,6 +61,7 @@ public class WaterAnimal extends Animal implements IWaterAnimal{
     protected String speak() {
         return null;
     }
+    protected void setImgs() { }
 
     /**
      * Returns a string representation of the water animal.

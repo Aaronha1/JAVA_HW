@@ -6,5 +6,4 @@ public interface IWaterAnimal {
     public static double getMaxDive(){
         return MAX_DIVE;
     }
-    public void setImgs(String img);
 }

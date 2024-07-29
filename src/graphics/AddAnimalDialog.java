@@ -8,19 +8,26 @@ import java.util.ArrayList;
 
 public class AddAnimalDialog extends JDialog {
 
+    private String[] animalsType;
 
-    public AddAnimalDialog(JFrame owner, ArrayList<Animal> animals) {
+    public AddAnimalDialog(JFrame owner) {
         super(owner, "Add Animal to Competition", true);
 
+        try {CompetitionInfo.checks();}
+        catch (IllegalStateException e) {return;}
 
+        animalsType = CompetitionInfo.listAnimals();
 
-        setLayout(new GridLayout(4, 2));
-        String[] animalsType = {"Alligator", "Cat", "Dog", "Dolphin", "Eagle", "Pigeon", "Snake", "Whale"};
+        setLayout(new GridLayout(2, 2));
         JButton[] button = new JButton[animalsType.length];
+
         for (int i = 0; i < button.length; i++) {
             button[i] = new JButton(animalsType[i]);
+            String aType = animalsType[i];
             add(button[i]);
+            button[i].addActionListener(e -> addAnimal(aType));
         }
+        /*
         button[0].addActionListener(e -> addAnimal(animalsType[0],animals));
         button[1].addActionListener(e -> addAnimal(animalsType[1],animals));
         button[2].addActionListener(e -> addAnimal(animalsType[2],animals));
@@ -29,7 +36,7 @@ public class AddAnimalDialog extends JDialog {
         button[5].addActionListener(e -> addAnimal(animalsType[5],animals));
         button[6].addActionListener(e -> addAnimal(animalsType[6],animals));
         button[7].addActionListener(e -> addAnimal(animalsType[7],animals));
-
+        */
 
         setSize(400, 300);
         setLocationRelativeTo(owner);
@@ -42,12 +49,11 @@ public class AddAnimalDialog extends JDialog {
         double weight = promptForDouble("Enter weight:", "Weight must be a positive number.");
         int speed = promptForInt("Enter speed:", "Speed must be a positive number.");
         int id = promptForInt("Enter ID:", "ID must be a positive number.");
-        int size = promptForInt("Enter size:", "Size must be a positive number.");
         int maxEnergy = promptForInt("Enter max energy:", "Max energy must be a positive number.");
         int energyPerMeter = promptForInt("Enter energy per meter:", "Energy per meter must be a positive number.");
         ArrayList<Medal> medals = gatherMedals();
 
-        return new AnimalAttributes(name, gender, weight, speed, medals, id, size, maxEnergy, energyPerMeter, Orientation.EAST);
+        return new AnimalAttributes(name, gender, weight, speed, medals, id, maxEnergy, energyPerMeter, Orientation.EAST);
     }
     private String promptForString(String message, String errorMessage) {
         String input = null;
@@ -189,7 +195,7 @@ public class AddAnimalDialog extends JDialog {
         return medalsList;
     }
 
-    private void addAnimal(String type,ArrayList<Animal> animals) {
+    private void addAnimal(String type) {
 
         AnimalAttributes attributes = gatherCommonAttributes();
         Animal animal = null;
@@ -201,21 +207,21 @@ public class AddAnimalDialog extends JDialog {
                 int noLegs = promptForInt("Enter legs number:", "legs number must be a positive number..");
                 String areaOfLiving = promptForString("Enter area of living:", "area of living cannot be empty.");
                 animal = new Alligator(attributes.name, attributes.gender, attributes.weight,attributes.speed,
-                        attributes.medals, attributes.id, attributes.size,attributes.maxEnergy,attributes.energyPerMeter,
-                       attributes.orien,diveDpet,noLegs,areaOfLiving);
+                        attributes.medals, attributes.id,attributes.maxEnergy,attributes.energyPerMeter,
+                        attributes.orien,diveDpet,noLegs,areaOfLiving);
                 break;
             case "Cat":
                 int noLegsCat = promptForInt("Enter legs number:", "legs number must be a positive number.");
                 boolean castrated = promptForBoolean("Castrated?");
                 animal = new Cat(attributes.name, attributes.gender,attributes.weight,attributes.speed,attributes.medals,
-                        attributes.id,attributes.size,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
+                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
                         noLegsCat,castrated);
                 break;
             case "Dog":
                 int noLegsDog = promptForInt("Enter legs number:", "legs number must be a positive number.");
                 String breed = promptForString("Enter breed type:", "breed type cannot be empty.");
                 animal = new Dog(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.medals,
-                        attributes.id,attributes.size,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
+                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
                         noLegsDog,breed);
                 break;
             case "Dolphin":
@@ -223,7 +229,7 @@ public class AddAnimalDialog extends JDialog {
                         + WaterAnimal.MAX_DIVE);
                 WaterType waterType = promptForWaterType();
                 animal = new Dolphin(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.medals,
-                        attributes.id,attributes.size,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
+                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
                         diveDpetDolphin, waterType);
                 break;
             case "Eagle":
@@ -232,7 +238,7 @@ public class AddAnimalDialog extends JDialog {
                 double wingSpan = promptForDouble("Enter wing span:",
                         "wing span must be a positive number.");
                 animal = new Eagle(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.medals,
-                        attributes.id,attributes.size,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,wingSpan,
+                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,wingSpan,
                         altitudeOfFlight);
                 break;
             case "Pigeon":
@@ -240,38 +246,40 @@ public class AddAnimalDialog extends JDialog {
                 double wingSpanPigeon = promptForDouble("Enter wing span:",
                         "wing span must be a positive number.");
                 animal = new Pigeon(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.medals,
-                        attributes.id,attributes.size,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,wingSpanPigeon,
+                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,wingSpanPigeon,
                         family);
                 break;
             case "Snake":
                 double length = promptForDouble("Enter length:", "length must be a positive number.");
                 Poisonous poisonous = promptForPoisonous();
                 animal = new Snake(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.medals,
-                        attributes.id,attributes.size,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,length,
+                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,length,
                         poisonous);
                 break;
             case "Whale":
                 double diveDpetWhale = promptForDiveDepth("Enter div dept for Whale:", "dive dpet must be a negative number between 0 to " + WaterAnimal.MAX_DIVE);
                 String foodType = promptForString("Enter food type:", "food type cannot be empty.");
                 animal = new Whale(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.medals,
-                        attributes.id,attributes.size,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
+                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
                         diveDpetWhale,foodType);
                 break;
         }
 
         if (animal != null) {
-            animals.add(animal);
+            CompetitionInfo.addToArr(animal,type);
+            dispose();
         }
+
     }
     private static class AnimalAttributes {
         String name;
         Gender gender;
         double weight;
-        int speed ,size,id, maxEnergy,energyPerMeter;
+        int speed,id, maxEnergy,energyPerMeter;
         ArrayList<Medal> medals;
         Orientation orien;
 
-        AnimalAttributes(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size,
+        AnimalAttributes(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
                          int maxEnergy, int energyPerMeter, Orientation orien) {
             this.name = name;
             this.gender = gender;
@@ -279,7 +287,6 @@ public class AddAnimalDialog extends JDialog {
             this.speed = speed;
             this.medals = medals;
             this.id = id;
-            this.size = size;
             this.maxEnergy = maxEnergy;
             this.energyPerMeter = energyPerMeter;
             this.orien = orien;

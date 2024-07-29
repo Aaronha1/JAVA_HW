@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class Alligator extends WaterAnimal implements IReptile,IWaterAnimal,ITerrestrialAnimals {
 
     private final String AreaOfLiving;
-    private IWaterAnimal waterAnimal;
-    private ITerrestrialAnimals terrestrialAnimals;
+    private final IWaterAnimal waterAnimal;
+    private final ITerrestrialAnimals terrestrialAnimals;
     /**
      * Default constructor for Alligator.
      * Initializes with default values and sets the area of living to "River".
@@ -23,7 +23,6 @@ public class Alligator extends WaterAnimal implements IReptile,IWaterAnimal,ITer
         waterAnimal = new WaterAnimal();
         terrestrialAnimals = new TerrestrialAnimals();
         this.AreaOfLiving = "River";
-        setImgs();
     }
     
     /**
@@ -37,31 +36,25 @@ public class Alligator extends WaterAnimal implements IReptile,IWaterAnimal,ITer
      * @param diveDept The dive depth of the alligator.
      * @param areaOfLiving The area where the alligator lives.
      */
-    public Alligator(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size,
+    public Alligator(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
                      int maxEnergy, int energyPerMeter, Orientation orien, double diveDept, int noLegs,
                      String areaOfLiving){
-        super(name, gender, weight, speed,medals,id,size,maxEnergy,energyPerMeter,orien, diveDept);
-        this.waterAnimal = new WaterAnimal(name,gender,weight,speed,medals,id,size,maxEnergy,energyPerMeter, orien, diveDept);
-        this.terrestrialAnimals = new TerrestrialAnimals(name,gender,weight,speed,medals,id,size,maxEnergy,
+        super(name, gender, weight, speed,medals,id,maxEnergy,energyPerMeter,orien, diveDept);
+        this.waterAnimal = new WaterAnimal(name,gender,weight,speed,medals,id,maxEnergy,energyPerMeter, orien, diveDept);
+        this.terrestrialAnimals = new TerrestrialAnimals(name,gender,weight,speed,medals,id,maxEnergy,
                 energyPerMeter,orien, noLegs);
         this.AreaOfLiving = areaOfLiving;
-        setImgs();
     }
 
-    private void setImgs(){
+    protected void setImgs(){
         if ("River".equals(AreaOfLiving)){
-            setImgs("alligator3");
+            setImgs("alligator3.png");
         } else {
-            setImgs("alligator2E", "alligator2S", "alligator2W", "alligator2N");
+            setImgs("alligator2E.png", "alligator2S.png", "alligator2W.png", "alligator2N.png");
         }
     }
 
-    public void setImgs(String e,String s,String w,String n){
-        img1 = Img(e);
-        img2 = Img(s);
-        img3 = Img(w);
-        img4 = Img(n);
-    }
+
 
     /**
      * Checks if this alligator is equal to another object.

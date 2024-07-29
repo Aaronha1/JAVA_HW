@@ -100,11 +100,13 @@ public abstract class Mobile implements ILocatable {
      *
      * @return A string representation of the mobile object
      */
-    
+    public double getTotalDistance(){
+        return totalDistance;
+    }
     public String toString() {
         return "Mobile{" +
-                "location=" + location +
-                ", totalDistance=" + totalDistance +
+                "location=" + getLocation() +
+                ", totalDistance=" + getTotalDistance() +
                 '}';
     }
 }

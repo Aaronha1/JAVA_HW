@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Cat extends TerrestrialAnimals{
     private final boolean castrated;
 
-    
     /**
      * Default constructor for Cat.
      * Initializes with default values and sets castrated to false.
@@ -20,10 +19,8 @@ public class Cat extends TerrestrialAnimals{
     public Cat(){
         super();
         this.castrated = false;
-        setImgs();
-
     }
-    
+
     /**
      * Constructs a Cat with specified properties.
      *
@@ -35,15 +32,14 @@ public class Cat extends TerrestrialAnimals{
      * @param noLegs The number of legs the cat has.
      * @param castrated Indicates whether the cat is castrated.
      */
-    public Cat(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size, int maxEnergy,
+    public Cat(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int maxEnergy,
                int energyPerMeter, Orientation orien, int noLegs, boolean castrated){
-        super(name, gender, weight, speed, medals,id,size,maxEnergy,energyPerMeter,orien, noLegs);
+        super(name, gender, weight, speed, medals,id,maxEnergy,energyPerMeter,orien, noLegs);
         this.castrated = castrated;
-        setImgs();
     }
 
-    private void setImgs(){
-        setImgs("cat2E","cat2S","cat2W","cat2N");
+    protected void setImgs(){
+        setImgs("cat2E.png","cat2S.png","cat2W.png","cat2N.png");
     }
 
     

@@ -13,7 +13,7 @@ public class Snake extends TerrestrialAnimals implements IReptile{
 
     private final double length;
     private final Poisonous poisonous;
-    
+
     /**
      * Default constructor for Snake.
      * Initializes with default values: length 1.5 meters and poisonous as Toxic.
@@ -23,7 +23,7 @@ public class Snake extends TerrestrialAnimals implements IReptile{
         this.length = 1.5;
         this.poisonous = Poisonous.LOW;
     }
-    
+
     /**
      * Constructs a Snake with specified properties.
      *
@@ -35,15 +35,15 @@ public class Snake extends TerrestrialAnimals implements IReptile{
      * @param length The length of the snake.
      * @param poisonous Indicates whether the snake is poisonous or not.
      */
-    public Snake(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size, int maxEnergy,
+    public Snake(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int maxEnergy,
                  int energyPerMeter, Orientation orien, double length, Poisonous poisonous){
-        super(name,gender,weight,speed,medals,id,size,maxEnergy,energyPerMeter,orien, 0);
+        super(name,gender,weight,speed,medals,id,maxEnergy,energyPerMeter,orien, 0);
         this.length = length;
         this.poisonous = poisonous;
     }
 
-    private void setImgs() {
-        setImgs("snake2E","snake2S","snake2W","snake2N");
+    protected void setImgs() {
+        setImgs("snake2E.png","snake2S.png","snake2W.png","snake2N.png");
     }
 
     /**

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Dog extends TerrestrialAnimals{
 
     private final String breed;
-    
+
     /**
      * Default constructor for Dog.
      * Initializes with default values and sets the breed to "Pitbull".
@@ -20,9 +20,8 @@ public class Dog extends TerrestrialAnimals{
     public Dog(){
         super();
         this.breed = "Pitbull";
-        setImgs();
     }
-    
+
     /**
      * Constructs a Dog with specified properties.
      *
@@ -34,14 +33,13 @@ public class Dog extends TerrestrialAnimals{
      * @param noLegs The number of legs the dog has.
      * @param breed The breed of the dog.
      */
-    public Dog(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size,
+    public Dog(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
                int maxEnergy, int energyPerMeter , Orientation orien, int noLegs, String breed){
-        super(name,gender,weight,speed,medals,id,size,maxEnergy,energyPerMeter,orien, noLegs);
+        super(name,gender,weight,speed,medals,id,maxEnergy,energyPerMeter,orien, noLegs);
         this.breed = breed;
-        setImgs();
     }
-    private void setImgs(){
-        setImgs("dog2E","dog2S","dog2W","dog2N");
+    protected void setImgs(){
+        setImgs("dog2E.png","dog2S.png","dog2W.png","dog2N.png");
     }
 
     /**

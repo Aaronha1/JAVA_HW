@@ -12,17 +12,17 @@ import java.util.ArrayList;
  */
 public class TerrestrialAnimals extends Animal implements ITerrestrialAnimals {
     private final int noLegs;
-    
+
     /**
      * Default constructor for TerrestrialAnimals.
      * Initializes with default values: position (0,20) and 2 legs.
      */
     public TerrestrialAnimals(){
         super();
-        this.setPosition(new Point(0,20));
+        this.setPosition(new Point(0,0));
         this.noLegs = 2;
     }
-    
+
     /**
      * Constructs a TerrestrialAnimals with specified properties.
      *
@@ -33,18 +33,12 @@ public class TerrestrialAnimals extends Animal implements ITerrestrialAnimals {
      * @param medals An array of medals won by the terrestrial animal.
      * @param noLegs The number of legs the terrestrial animal has.
      */
-    public TerrestrialAnimals(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id, int size,
+    public TerrestrialAnimals(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
                               int maxEnergy, int energyPerMeter, Orientation orien, int noLegs){
-        super(name,gender,weight,speed,new Point(0,0),medals,id,size,maxEnergy,energyPerMeter,orien);
+        super(name,gender,weight,speed,new Point(0,0),medals,id,maxEnergy,energyPerMeter,Orientation.NORTH);
         this.noLegs = noLegs;
     }
 
-    public void setImgs(String e,String s,String w,String n){
-        img1 = Img(e);
-        img2 = Img(s);
-        img3 = Img(w);
-        img4 = Img(n);
-    }
     
     /**
      * Checks if this terrestrial animal is equal to another object.
@@ -65,6 +59,8 @@ public class TerrestrialAnimals extends Animal implements ITerrestrialAnimals {
     protected String speak() {
         return null;
     }
+    protected void setImgs() { }
+
 
     /**
      * Returns a string representation of the terrestrial animal.
@@ -72,7 +68,7 @@ public class TerrestrialAnimals extends Animal implements ITerrestrialAnimals {
      * @return A string representation of the terrestrial animal including its number of legs.
      */
     public String toString() {
-        return super.toString() + ". With " + this.noLegs + " legs ";
+        return super.toString() + ". With " + getNoLegs() + " legs ";
     }
     public int getNoLegs(){
         return noLegs;
