@@ -1,5 +1,6 @@
 package animals;
 import graphics.BackGroundPanel;
+import graphics.CompetitionInfo;
 import graphics.IDrawable;
 import mobility.ILocatable;
 import mobility.Mobile;
@@ -92,7 +93,7 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
         System.out.println("Animal " + getAnimalName() + " said " + speak());
     }
 
-    public void setPosition(Point p) {
+    protected void setPosition(Point p) {
         this.location = new Point(p.getX(), p.getY());
     }
 
@@ -106,6 +107,11 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
 
     public int getSpeed() {
         return speed;
+    }
+
+    public void restartAnimal(){
+        setPosition(CompetitionInfo.getPosition());
+        changeDirection(Orientation.EAST);
     }
 
     protected boolean setSpeed(int num) {

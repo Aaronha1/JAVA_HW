@@ -106,7 +106,7 @@ public class CompetitionInfo {
                     info.display = false;
                     for (String s: listAnimals()) {
                         if (s.equals(info.type)) {
-                            info.animal.setPosition(getPosition());
+                            info.animal.restartAnimal();
                             info.category = categ;
                             info.display = true;
                             numRuns++;
