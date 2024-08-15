@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40cac5b3-4729-421e-ba19-2993eee4f325" name="Changes" comment="update images" />
+    <list default="true" id="40cac5b3-4729-421e-ba19-2993eee4f325" name="Changes" comment="update images">
+      <change afterPath="$PROJECT_DIR$/src/animals/AnimalThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/competitions/CourierTournament.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/competitions/Referee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/competitions/RegularTournament.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/competitions/Scores.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/competitions/Tournament.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/competitions/TournamentThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/graphics/AddAnimalGroup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/graphics/GroupSelectionDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/animals/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/animals/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/AddAnimalDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/AddAnimalDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/AddCompetitionDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/AddCompetitionDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/CompetitionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/CompetitionInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/CompetitionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/CompetitionPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/IDrawable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/IDrawable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/Image.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,7 +44,9 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2jZ93ih2SFt2kR2DwZhhZLaT5E1" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -46,6 +66,11 @@
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="animals" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Sys" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="system.Sys" />

@@ -50,8 +50,8 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
         this.maxEnergy = maxEnergy;
         this.energyPerMeter = energyPerMeter;
         this.orien = Orientation.EAST;//orien;
-        this.energyAmount = 0;
-        this.energyConsumption = 0;
+        this.energyAmount = maxEnergy;
+        this.energyConsumption = maxEnergy;
         setImgs();
     }
 
@@ -95,6 +95,7 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
 
     protected void setPosition(Point p) {
         this.location = new Point(p.getX(), p.getY());
+        setLocation(p);
     }
 
     public String getAnimalName() {
@@ -109,10 +110,6 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
         return speed;
     }
 
-    public void restartAnimal(){
-        setPosition(CompetitionInfo.getPosition());
-        changeDirection(Orientation.EAST);
-    }
 
     protected boolean setSpeed(int num) {
         if (num > 0) {
@@ -182,8 +179,12 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
             energyAmount = 0;
         }
 
-        setPosition(newLocation);
         move(newLocation);
+        setPosition(newLocation);
+    }
+    public void editPosition(Point p,Orientation o){
+        setPosition(p);
+        changeDirection(o);
     }
     protected void changeDirection(Orientation newOrien) {
         orien = newOrien;
@@ -233,10 +234,17 @@ public abstract class Animal extends Mobile implements ILocatable, IDrawable, Cl
 
     public void drewObject(Graphics g) {
         switch (orien) {
-            case EAST -> g.drawImage(img1, location.getX(), location.getY(), size, size, pan);
-            case SOUTH -> g.drawImage(img2, location.getX(), location.getY() - size / 10, size, size, pan);
-            case WEST -> g.drawImage(img3, location.getX(), location.getY() - size / 10, size * 2, size, pan);
-            case NORTH -> g.drawImage(img4, location.getX() - size / 2, location.getY() - size / 10, size, size * 2, pan);
+            case EAST -> g.drawImage(img1, location.getX(), location.getY() - size / 10, size, size, pan);
+            case SOUTH -> g.drawImage(img2, location.getX() - size / 4, location.getY(), size, size, pan);
+            case WEST -> g.drawImage(img3, location.getX(), location.getY() - size / 10, size, size, pan);
+            case NORTH -> g.drawImage(img4, location.getX(), location.getY(), size, size, pan);
         }
+        g.setFont(new Font("Arial", Font.BOLD, 12));
+        g.setColor(Color.BLACK);
+        FontMetrics fm = g.getFontMetrics();
+        int textWidth = fm.stringWidth(getAnimalName());
+        int textX = location.getX() + (size - textWidth) / 2;
+        int textY = location.getY() + (size - 12) / 2;
+        g.drawString(getAnimalName(), textX, textY);
     }
 }

@@ -3,16 +3,19 @@ package graphics;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-import java.util.Objects;
-
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Date;
 import animals.*;
 import mobility.Point;
+import competitions.*;
 
-public class CompetitionInfo {
+public final class CompetitionInfo {
     private static String CompetitionCategory = null;
+    private static String CompetitionType = null;
     private static final ArrayList<CompetitionInfo> allAnimals = new ArrayList<>();
-    private static int MAX_RUNNERS;
-    private static int numRuns = 0;
+    private static int MAX_GROUPS;
+    private static int numGroups = 0;
 
     private static Timer timer;
 
@@ -20,26 +23,58 @@ public class CompetitionInfo {
     private String category;
     private final String type;
     private boolean display;
+    private int group;
+    private int runner;
 
-    private CompetitionInfo(Animal animal, String type){
+    private CompetitionInfo(Animal animal, String type,int group,int runner){
         this.animal = animal;
         this.category = getCategory();
         this.type = type;
+        this.group = group;
+        this.runner = runner;
         this.display = true;
     }
 
-    public static void addToArr(Animal animal, String type) {
-        allAnimals.add(new CompetitionInfo(animal, type));
-        numRuns++;
+    public static void addToArr(Animal animal, String type,int group,int runner) {
+        if (runner == 2) dynamicPosition(animal);
+        allAnimals.add(new CompetitionInfo(animal, type,group,runner));
     }
 
+    public static int getMaxGroups(){ return MAX_GROUPS; }
+    public static int getNumGroups(){ return numGroups; }
+    public static void setNumGroups(int groups){
+        numGroups = groups;
+    }
+    public static String getCompetitionType(){ return CompetitionType; }
+    public static void setCompetitionType(String cType){
+        CompetitionType = cType;
+    }
+    public static void dynamicPosition(Animal animal){
+        Point p;
+        if ("Terrestrial".equals(getCategory())) {
+            p = new Point(735,455);
+        } else {
+            int x = animal.getLocation().getX();
+            int y = animal.getLocation().getY();
+            p = new Point(x+getDistanceNeeded(),y);
+        }
+        animal.editPosition(p,Orientation.WEST);
+    }
 
-    public static Point getPosition() {
+    public static Point getPosition(int group) {
         return switch (getCategory()) {
-            case "Air" -> new Point(0,560*numRuns/MAX_RUNNERS);
-            case "Water" -> new Point(20,460*numRuns/MAX_RUNNERS+60);
+            case "Air" -> new Point(0,560* group / MAX_GROUPS);
+            case "Water" -> new Point(20,460* group / MAX_GROUPS +60);
             case "Terrestrial" -> new Point(0,0);
             default -> new Point();
+        };
+    }
+    public static int getDistanceNeeded(){
+        return switch (getCategory()) {
+            case "Air" -> 735;
+            case "Water" -> 710;
+            case "Terrestrial" -> 1190;
+            default -> 0;
         };
     }
     public static void printArr() {
@@ -77,46 +112,66 @@ public class CompetitionInfo {
         frame.setVisible(true);
     }
 
-    public static void checks(){
-        if (getCategory() == null) {
-            JOptionPane.showMessageDialog(null, "Competition type not selected yet.", "Error", JOptionPane.ERROR_MESSAGE);
-            throw new IllegalStateException();
-        }
-        if (numRuns >= MAX_RUNNERS) {
-            JOptionPane.showMessageDialog(null, "You have reached maximum animals for this competition.", "Error", JOptionPane.ERROR_MESSAGE);
-            throw new IllegalStateException();
-        }
+    public static void printScores(){
+        String[] columnNames = {"Group","Time"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        timer = new Timer(200, e -> {
+            model.setRowCount(0);
+            for (Map.Entry<String, Date> entry :
+                    TournamentThread.getRealtimeScores().entrySet()) {
+                Object[] row = {entry.getKey(),entry.getValue()};
+                model.addRow(row);
+            }
+        });
+        timer.start();
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        table.setFillsViewportHeight(true);
+
+        JFrame frame = new JFrame("Competition Scores");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.add(scrollPane);
+        frame.setSize(300, 300);
+        frame.setVisible(true);
     }
     public static String getCategory() {
         return CompetitionCategory;
     }
 
+    public static ArrayList<ArrayList<Animal>> getGroups(){
+        ArrayList<ArrayList<Animal>> groups = new ArrayList<>();
+        for (int i=1; i<=numGroups; i++){
+            groups.add(getAnimals(i));
+        }
+        return groups;
+    }
+    private static ArrayList<Animal> getAnimals(int group){
+        ArrayList<Animal> animals = new ArrayList<>();
+        for (CompetitionInfo info : allAnimals){
+            if (info.display && info.group == group) {
+                animals.add(info.animal);
+            }
+        }
+        return animals;
+    }
+
+
     public static void setCategory(String categ) {
-        MAX_RUNNERS = switch (categ) {
+        MAX_GROUPS = switch (categ) {
             case "Air" -> 5;
             case "Water" -> 4;
-            case "Terrestrial" -> 30;
+            case "Terrestrial" -> 3;
             default -> 0;
         };
         CompetitionCategory = categ;
-        numRuns = 0;
-        if (!getDisplayedAnimals().isEmpty()) {
-            for (CompetitionInfo info : allAnimals) {
-                if (info.display) {
-                    info.display = false;
-                    for (String s: listAnimals()) {
-                        if (s.equals(info.type)) {
-                            info.animal.restartAnimal();
-                            info.category = categ;
-                            info.display = true;
-                            numRuns++;
-                        }
-                    }
-                }
-            }
+        clearAll();
+    }
+    public static void clearAll(){
+        for (CompetitionInfo info : allAnimals){
+            info.display = false;
         }
     }
-
     public static String[] listAnimals(){
         return switch (getCategory()) {
             case "Air" -> new String[]{"Eagle", "Pigeon"};
@@ -163,7 +218,6 @@ public class CompetitionInfo {
             String[] index = animalToClear.split(" - ");
             int i = Integer.parseInt(index[0]);
             allAnimals.get(i).display = false;
-            numRuns--;
         }
     }
 

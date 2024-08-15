@@ -10,12 +10,12 @@ import java.util.ArrayList;
 public class AddAnimalDialog extends JDialog {
 
     private String[] animalsType;
+    int group,runner;
 
-    public AddAnimalDialog(JFrame owner) {
+    public AddAnimalDialog(JFrame owner,int group,int runner) {
         super(owner, "Add Animal to Competition", true);
-
-        try {CompetitionInfo.checks();}
-        catch (IllegalStateException e) {return;}
+        this.group = group;
+        this.runner = runner;
 
         animalsType = CompetitionInfo.listAnimals();
 
@@ -258,7 +258,7 @@ public class AddAnimalDialog extends JDialog {
         }
 
         if (animal != null) {
-            CompetitionInfo.addToArr(animal,type);
+            CompetitionInfo.addToArr(animal,type,1,1);
             dispose();
         }
 
@@ -284,7 +284,7 @@ public class AddAnimalDialog extends JDialog {
             this.maxEnergy = maxEnergy;
             this.energyPerMeter = energyPerMeter;
             this.orien = orien;
-            this.loction = CompetitionInfo.getPosition();
+            this.loction = CompetitionInfo.getPosition(0);
         }
     }
 

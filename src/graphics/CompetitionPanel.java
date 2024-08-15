@@ -10,20 +10,19 @@ import java.util.ArrayList;
 
 public class CompetitionPanel extends JPanel {
     private JButton[] button;
-    private AddCompetitionDialog addCompetitionDialog;
-    private AddAnimalDialog addAnimalDialog;
     public CompetitionPanel(){
 
         JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(CompetitionPanel.this);
-        button = new JButton[6];
+        button = new JButton[7];
 
-        setLayout(new GridLayout(1,6));
+        setLayout(new GridLayout(1,7));
         button[0] = new JButton("Add Competition");
-        button[1] = new JButton("Add Animal");
-        button[2] = new JButton("Clear");
-        button[3] = new JButton("Eat");
-        button[4] = new JButton("Info");
-        button[5] = new JButton("Exit");
+        button[1] = new JButton("Start");
+        button[2] = new JButton("Scores");
+        button[3] = new JButton("Clear");
+        button[4] = new JButton("Eat");
+        button[5] = new JButton("Info");
+        button[6] = new JButton("Exit");
 
 
         for (int i = 0 ; i < button.length ; i ++){
@@ -34,36 +33,43 @@ public class CompetitionPanel extends JPanel {
         button[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                addCompetitionDialog = new AddCompetitionDialog(owner);
+                new AddCompetitionDialog(owner);
+                new GroupSelectionDialog(owner);
+                new AddAnimalGroup(owner);
             }
         });
         button[1].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addAnimalDialog = new AddAnimalDialog(owner);
+
             }
         });
         button[2].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CompetitionInfo.clearSelectedAnimal();
+                CompetitionInfo.printScores();
             }
         });
         button[3].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CompetitionInfo.feedAnimal();
+                CompetitionInfo.clearSelectedAnimal();
             }
         });
         button[4].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CompetitionInfo.feedAnimal();
+            }
+        });
+        button[5].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CompetitionInfo.printArr();
             }
         });
 
-        button[5].addActionListener(new ActionListener() {
+        button[6].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
