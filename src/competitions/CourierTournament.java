@@ -6,8 +6,8 @@ import graphics.CompetitionInfo;
 import java.util.*;
 
 public class CourierTournament extends Tournament {
-    private final Boolean startFlag = false;
-    private final Scores scores = new Scores();
+    private static Boolean startFlag = true;
+    private static final Scores scores = new Scores();
 
     @Override
     protected void setup(ArrayList<ArrayList<Animal>> groups) {
@@ -35,4 +35,6 @@ public class CourierTournament extends Tournament {
         tournamentThread = new TournamentThread(scores, startFlag, numGroups);
         new Thread(tournamentThread).start();
     }
+    public void upFlag() { startFlag = true; }
+
 }

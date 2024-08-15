@@ -1,4 +1,5 @@
 package graphics;
+
 import animals.*;
 import mobility.Point;
 import olympics.*;
@@ -6,264 +7,250 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-
 public class AddAnimalDialog extends JDialog {
 
     private String[] animalsType;
-    int group,runner;
+    int group, runner;
 
-    public AddAnimalDialog(JFrame owner,int group,int runner) {
+    public AddAnimalDialog(JFrame owner, int group, int runner) {
         super(owner, "Add Animal to Competition", true);
         this.group = group;
         this.runner = runner;
 
         animalsType = CompetitionInfo.listAnimals();
 
-        setLayout(new GridLayout(2, 2));
-        JButton[] button = new JButton[animalsType.length];
+        setLayout(new BorderLayout());
 
-        for (int i = 0; i < button.length; i++) {
-            button[i] = new JButton(animalsType[i]);
+        JPanel animalSelectionPanel = new JPanel(new GridLayout(1, animalsType.length));
+        JButton[] buttons = new JButton[animalsType.length];
+
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i] = new JButton(animalsType[i]);
             String aType = animalsType[i];
-            add(button[i]);
-            button[i].addActionListener(e -> addAnimal(aType));
+            animalSelectionPanel.add(buttons[i]);
+            buttons[i].addActionListener(e -> addAnimal(aType));
         }
 
+        add(animalSelectionPanel, BorderLayout.NORTH);
 
-        setSize(400, 300);
+        setSize(600, 400);
         setLocationRelativeTo(owner);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
     }
-    private AnimalAttributes gatherCommonAttributes() {
-        String name = promptForString("Enter name:", "Name cannot be empty.");
-        Gender gender = promptForGender();
-        double weight = promptForDouble("Enter weight:", "Weight must be a positive number.");
-        int speed = promptForInt("Enter speed:", "Speed must be a positive number.");
-        int id = promptForInt("Enter ID:", "ID must be a positive number.");
-        int maxEnergy = promptForInt("Enter max energy:", "Max energy must be a positive number.");
-        int energyPerMeter = promptForInt("Enter energy per meter:", "Energy per meter must be a positive number.");
-        ArrayList<Medal> medals = gatherMedals();
 
-        return new AnimalAttributes(name, gender, weight, speed, medals, id, maxEnergy, energyPerMeter, Orientation.EAST,group);
-    }
-    private String promptForString(String message, String errorMessage) {
-        String input = null;
-        while (input == null || input.trim().isEmpty()) {
-            input = JOptionPane.showInputDialog(this, message);
-            if (input == null || input.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        return input;
-    }
-    private double promptForDiveDepth(String message, String errorMessage) {
-        double value = Double.NaN;
-        boolean validInput = false;
+    private void addAnimal(String type) {
+        JPanel inputPanel = new JPanel(new GridLayout(10, 2, 10, 10));
 
-        while (!validInput) {
-            try {
-                String input = JOptionPane.showInputDialog(this, message);
-                if (input == null) {
-                    return Double.NaN; // Handle cancel scenario
-                }
-                value = Double.parseDouble(input);
-                if (value > 0 || value < WaterAnimal.MAX_DIVE) {
-                    JOptionPane.showMessageDialog(this, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    validInput = true;
-                }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Invalid input. Please enter a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        return value;
-    }
-    private double promptForAltitudeOfFlight(String message, String errorMessage) {
-        double value = Double.NaN;
-        boolean validInput = false;
+        JTextField nameField = new JTextField();
+        JComboBox<Gender> genderComboBox = new JComboBox<>(Gender.values());
+        JTextField weightField = new JTextField();
+        JTextField speedField = new JTextField();
+        JTextField idField = new JTextField();
+        JTextField maxEnergyField = new JTextField();
+        JTextField energyPerMeterField = new JTextField();
 
-        while (!validInput) {
-            try {
-                String input = JOptionPane.showInputDialog(this, message);
-                if (input == null) {
-                    return Double.NaN; // Handle cancel scenario
-                }
-                value = Double.parseDouble(input);
-                if (value < 0 || value > Eagle.getMaxALTITUDE()) {
-                    JOptionPane.showMessageDialog(this, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    validInput = true;
-                }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Invalid input. Please enter a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        return value;
-    }
-    private int promptForInt(String message, String errorMessage) {
-        int value = -1;
-        boolean validInput = false;
+        inputPanel.add(new JLabel("Name:"));
+        inputPanel.add(nameField);
+        inputPanel.add(new JLabel("Gender:"));
+        inputPanel.add(genderComboBox);
+        inputPanel.add(new JLabel("Weight:"));
+        inputPanel.add(weightField);
+        inputPanel.add(new JLabel("Speed:"));
+        inputPanel.add(speedField);
+        inputPanel.add(new JLabel("ID:"));
+        inputPanel.add(idField);
+        inputPanel.add(new JLabel("Max Energy:"));
+        inputPanel.add(maxEnergyField);
+        inputPanel.add(new JLabel("Energy per Meter:"));
+        inputPanel.add(energyPerMeterField);
 
-        while (!validInput) {
-            try {
-                String input = JOptionPane.showInputDialog(this, message);
-                if (input == null) {
-                    return -1; // Handle cancel scenario
-                }
-                value = Integer.parseInt(input);
-                if (value <= 0) {
-                    JOptionPane.showMessageDialog(this, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    validInput = true;
-                }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Invalid input. Please enter a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        return value;
-    }
-    private double promptForDouble(String message, String errorMessage) {
-        double value = -1;
-        boolean validInput = false;
+        // Specific fields for different animal types
+        JTextField specificField1 = new JTextField();
+        JTextField specificField2 = new JTextField();
+        JTextField specificField3 = new JTextField();
+        JComboBox<?> specificComboBox1 = null;
 
-        while (!validInput) {
-            try {
-                String input = JOptionPane.showInputDialog(this, message);
-                if (input == null) {
-                    return -1; // Handle cancel scenario
-                }
-                value = Double.parseDouble(input);
-                if (value <= 0) {
-                    JOptionPane.showMessageDialog(this, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    validInput = true;
-                }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Invalid input. Please enter a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            }
+        // Customize the specific fields based on the animal type
+        switch (type) {
+            case "Alligator":
+                inputPanel.add(new JLabel("Dive Depth:"));
+                inputPanel.add(specificField1);
+                inputPanel.add(new JLabel("Number of Legs:"));
+                inputPanel.add(specificField2);
+                inputPanel.add(new JLabel("Area of Living:"));
+                inputPanel.add(specificField3);
+                break;
+            case "Cat":
+                inputPanel.add(new JLabel("Number of Legs:"));
+                inputPanel.add(specificField1);
+                inputPanel.add(new JLabel("Castrated (Yes/No):"));
+                inputPanel.add(specificField2);
+                break;
+            case "Dog":
+                inputPanel.add(new JLabel("Number of Legs:"));
+                inputPanel.add(specificField1);
+                inputPanel.add(new JLabel("Breed Type:"));
+                inputPanel.add(specificField2);
+                break;
+            case "Dolphin":
+                inputPanel.add(new JLabel("Dive Depth:"));
+                inputPanel.add(specificField1);
+                inputPanel.add(new JLabel("Water Type:"));
+                specificComboBox1 = new JComboBox<>(WaterType.values());
+                inputPanel.add(specificComboBox1);
+                break;
+            case "Eagle":
+                inputPanel.add(new JLabel("Altitude of Flight:"));
+                inputPanel.add(specificField1);
+                inputPanel.add(new JLabel("Wing Span:"));
+                inputPanel.add(specificField2);
+                break;
+            case "Pigeon":
+                inputPanel.add(new JLabel("Family Type:"));
+                inputPanel.add(specificField1);
+                inputPanel.add(new JLabel("Wing Span:"));
+                inputPanel.add(specificField2);
+                break;
+            case "Snake":
+                inputPanel.add(new JLabel("Length:"));
+                inputPanel.add(specificField1);
+                inputPanel.add(new JLabel("Poisonous:"));
+                specificComboBox1 = new JComboBox<>(Poisonous.values());
+                inputPanel.add(specificComboBox1);
+                break;
+            case "Whale":
+                inputPanel.add(new JLabel("Dive Depth:"));
+                inputPanel.add(specificField1);
+                inputPanel.add(new JLabel("Food Type:"));
+                inputPanel.add(specificField2);
+                break;
         }
-        return value;
+
+        int result = JOptionPane.showConfirmDialog(this, inputPanel, "Enter "+type+" Details", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            AnimalAttributes attributes = new AnimalAttributes(
+                    nameField.getText(),
+                    (Gender) genderComboBox.getSelectedItem(),
+                    Double.parseDouble(weightField.getText()),
+                    Integer.parseInt(speedField.getText()),
+                    gatherMedals(),
+                    Integer.parseInt(idField.getText()),
+                    Integer.parseInt(maxEnergyField.getText()),
+                    Integer.parseInt(energyPerMeterField.getText()),
+                    Orientation.EAST,
+                    group
+            );
+
+            Animal animal = null;
+
+            switch (type) {
+                case "Alligator":
+                    animal = new Alligator(
+                            attributes.name, attributes.gender, attributes.weight, attributes.speed, attributes.loction,
+                            attributes.medals, attributes.id, attributes.maxEnergy, attributes.energyPerMeter,
+                            attributes.orien, Double.parseDouble(specificField1.getText()), Integer.parseInt(specificField2.getText()),
+                            specificField3.getText());
+                    break;
+                case "Cat":
+                    animal = new Cat(
+                            attributes.name, attributes.gender, attributes.weight, attributes.speed, attributes.loction,
+                            attributes.medals, attributes.id, attributes.maxEnergy, attributes.energyPerMeter,
+                            attributes.orien, Integer.parseInt(specificField1.getText()),
+                            Boolean.parseBoolean(specificField3.getText()));
+                    break;
+                case "Dog":
+                    animal = new Dog(
+                            attributes.name, attributes.gender, attributes.weight, attributes.speed, attributes.loction,
+                            attributes.medals, attributes.id, attributes.maxEnergy, attributes.energyPerMeter,
+                            attributes.orien, Integer.parseInt(specificField1.getText()), specificField2.getText());
+                    break;
+                case "Dolphin":
+                    animal = new Dolphin(
+                            attributes.name, attributes.gender, attributes.weight, attributes.speed, attributes.loction,
+                            attributes.medals, attributes.id, attributes.maxEnergy, attributes.energyPerMeter,
+                            attributes.orien, Double.parseDouble(specificField1.getText()),
+                            (WaterType) specificComboBox1.getSelectedItem());
+                    break;
+                case "Eagle":
+                    animal = new Eagle(
+                            attributes.name, attributes.gender, attributes.weight, attributes.speed, attributes.loction,
+                            attributes.medals, attributes.id, attributes.maxEnergy, attributes.energyPerMeter,
+                            attributes.orien, Double.parseDouble(specificField2.getText()),
+                            Double.parseDouble(specificField1.getText()));
+                    break;
+                case "Pigeon":
+                    animal = new Pigeon(
+                            attributes.name, attributes.gender, attributes.weight, attributes.speed, attributes.loction,
+                            attributes.medals, attributes.id, attributes.maxEnergy, attributes.energyPerMeter,
+                            attributes.orien, Double.parseDouble(specificField2.getText()), specificField1.getText());
+                    break;
+                case "Snake":
+                    animal = new Snake(
+                            attributes.name, attributes.gender, attributes.weight, attributes.speed, attributes.loction,
+                            attributes.medals, attributes.id, attributes.maxEnergy, attributes.energyPerMeter,
+                            attributes.orien, Double.parseDouble(specificField1.getText()),
+                            (Poisonous) specificComboBox1.getSelectedItem());
+                    break;
+                case "Whale":
+                    animal = new Whale(
+                            attributes.name, attributes.gender, attributes.weight, attributes.speed, attributes.loction,
+                            attributes.medals, attributes.id, attributes.maxEnergy, attributes.energyPerMeter,
+                            attributes.orien, Double.parseDouble(specificField1.getText()), specificField2.getText());
+                    break;
+            }
+
+            if (animal != null) {
+                CompetitionInfo.addToArr(animal, type, group, runner);
+            }
+
+            dispose();
+        }
     }
-    private Gender promptForGender() {
-        Gender[] options = {Gender.MALE, Gender.FEMALE, Gender.HERMAPHRODITE};
-        return (Gender) JOptionPane.showInputDialog(this, "Select gender:", "Gender",
-                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-    }
-    private WaterType promptForWaterType() {
-        WaterType[] options = {WaterType.SEA, WaterType.SWEET};
-        return (WaterType) JOptionPane.showInputDialog(this, "Select Water Type:", "Water Type",
-                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-    }
-    private Poisonous promptForPoisonous() {
-        Poisonous[] options = {Poisonous.HIGH, Poisonous.MEDIUM,Poisonous.LOW};
-        return (Poisonous) JOptionPane.showInputDialog(this, "Select Poisonous:", "Poisonous",
-                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-    }
-    private boolean promptForBoolean(String message) {
-        int option = JOptionPane.showConfirmDialog(this, message, "Boolean Input", JOptionPane.YES_NO_OPTION);
-        return option == JOptionPane.YES_OPTION;
-    }
-    private olympics.Type promptForMedalType() {
-        olympics.Type[] options = {olympics.Type.GOLD, olympics.Type.SILVER, olympics.Type.BRONZE};
-        return (olympics.Type) JOptionPane.showInputDialog(this, "Select medal type:", "Medal Type",
-                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-    }
+
+    // Helper method to gather medals
     private ArrayList<Medal> gatherMedals() {
-        boolean hasMedals = promptForBoolean("Does the animal have medals?");
         ArrayList<Medal> medalsList = new ArrayList<>();
-
-        if (hasMedals) {
+        if (promptForBoolean("Does the animal have medals?")) {
             int numberOfMedals = promptForInt("How many medals does the animal have?", "Number of medals must be a positive number.");
-
             for (int i = 0; i < numberOfMedals; i++) {
                 olympics.Type type = promptForMedalType();
-                String tournament = promptForString("Enter the name of the tournament for medal " + (i + 1) + ":", "Tournament name cannot be empty.");
-                int year = promptForInt("Enter the year of the tournament for medal " + (i + 1) + ":", "Year must be a positive number.");
+                String tournament = promptForString("Enter the name of the tournament for medal " + (i + 1) + ":");
+                int year = promptForInt("Enter the year of the tournament for medal " + (i + 1) + ":", "Year must be a valid number.");
                 medalsList.add(new Medal(type, tournament, year));
             }
         }
-
         return medalsList;
     }
 
-    private void addAnimal(String type) {
-
-        AnimalAttributes attributes = gatherCommonAttributes();
-        Animal animal = null;
-
-        switch (type) {
-            case "Alligator":
-                double diveDpet =promptForDiveDepth("Enter div dept for Alligator:", "dive dpet must be a negative number between 0 to "+
-                        WaterAnimal.MAX_DIVE);
-                int noLegs = promptForInt("Enter legs number:", "legs number must be a positive number..");
-                String areaOfLiving = promptForString("Enter area of living:", "area of living cannot be empty.");
-                animal = new Alligator(attributes.name, attributes.gender, attributes.weight,attributes.speed,attributes.loction,
-                        attributes.medals, attributes.id,attributes.maxEnergy,attributes.energyPerMeter,
-                        attributes.orien,diveDpet,noLegs,areaOfLiving);
-                break;
-            case "Cat":
-                int noLegsCat = promptForInt("Enter legs number:", "legs number must be a positive number.");
-                boolean castrated = promptForBoolean("Castrated?");
-                animal = new Cat(attributes.name, attributes.gender,attributes.weight,attributes.speed,attributes.loction,attributes.medals,
-                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
-                        noLegsCat,castrated);
-                break;
-            case "Dog":
-                int noLegsDog = promptForInt("Enter legs number:", "legs number must be a positive number.");
-                String breed = promptForString("Enter breed type:", "breed type cannot be empty.");
-                animal = new Dog(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.loction,attributes.medals,
-                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
-                        noLegsDog,breed);
-                break;
-            case "Dolphin":
-                double diveDpetDolphin = promptForDiveDepth("Enter div dept for Dolphin:", "dive dpet must be a negative number between 0 to "
-                        + WaterAnimal.MAX_DIVE);
-                WaterType waterType = promptForWaterType();
-                animal = new Dolphin(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.loction,attributes.medals,
-                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
-                        diveDpetDolphin, waterType);
-                break;
-            case "Eagle":
-                double altitudeOfFlight = promptForAltitudeOfFlight("Enter altitudeOfFlight:",
-                        "altitudeOfFlight must be a positive number. max of" + Eagle.getMaxALTITUDE());
-                double wingSpan = promptForDouble("Enter wing span:",
-                        "wing span must be a positive number.");
-                animal = new Eagle(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.loction,attributes.medals,
-                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,wingSpan,
-                        altitudeOfFlight);
-                break;
-            case "Pigeon":
-                String family = promptForString("Enter family type:", "family type cannot be empty.");
-                double wingSpanPigeon = promptForDouble("Enter wing span:",
-                        "wing span must be a positive number.");
-                animal = new Pigeon(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.loction,attributes.medals,
-                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,wingSpanPigeon,
-                        family);
-                break;
-            case "Snake":
-                double length = promptForDouble("Enter length:", "length must be a positive number.");
-                Poisonous poisonous = promptForPoisonous();
-                animal = new Snake(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.loction,attributes.medals,
-                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,length,
-                        poisonous);
-                break;
-            case "Whale":
-                double diveDpetWhale = promptForDiveDepth("Enter div dept for Whale:", "dive dpet must be a negative number between 0 to " + WaterAnimal.MAX_DIVE);
-                String foodType = promptForString("Enter food type:", "food type cannot be empty.");
-                animal = new Whale(attributes.name,attributes.gender,attributes.weight,attributes.speed,attributes.loction,attributes.medals,
-                        attributes.id,attributes.maxEnergy,attributes.energyPerMeter,attributes.orien,
-                        diveDpetWhale,foodType);
-                break;
-        }
-
-        if (animal != null) {
-            CompetitionInfo.addToArr(animal,type,group,runner);
-            dispose();
-        }
-
+    // Helper methods to prompt the user for various inputs
+    private boolean promptForBoolean(String message) {
+        int response = JOptionPane.showConfirmDialog(this, message, "Confirmation", JOptionPane.YES_NO_OPTION);
+        return response == JOptionPane.YES_OPTION;
     }
-    // attributes.loction
+
+    private int promptForInt(String message, String errorMessage) {
+        while (true) {
+            String input = JOptionPane.showInputDialog(this, message);
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private olympics.Type promptForMedalType() {
+        return (olympics.Type) JOptionPane.showInputDialog(this, "Select the medal type:", "Medal Type",
+                JOptionPane.QUESTION_MESSAGE, null, olympics.Type.values(), olympics.Type.values()[0]);
+    }
+
+    private String promptForString(String message) {
+        return JOptionPane.showInputDialog(this, message);
+    }
+
+
+// attributes.loction
     private static class AnimalAttributes {
         String name;
         Gender gender;

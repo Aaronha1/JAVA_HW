@@ -25,16 +25,9 @@ public class ZooPanel extends BackGroundPanel {
 
     private void startTimer() {
         timer = new Timer(1000, e -> {
-            updateAnimals();
-            repaint();
+            repaint(); // Only repaint, no movement update
         });
         timer.start();
-    }
-
-    private void updateAnimals() {
-        for (Animal animal : getAnimals()) {
-            animal.move();
-        }
     }
 
     @Override
@@ -45,7 +38,7 @@ public class ZooPanel extends BackGroundPanel {
 
     private void drawAnimals(Graphics g) {
         for (Animal animal : getAnimals()) {
-             animal.drewObject(g);
+            animal.drewObject(g);
         }
     }
 

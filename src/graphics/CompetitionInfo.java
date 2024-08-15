@@ -25,6 +25,7 @@ public final class CompetitionInfo {
     private boolean display;
     private int group;
     private int runner;
+    private static Tournament competition;
 
     private CompetitionInfo(Animal animal, String type,int group,int runner){
         this.animal = animal;
@@ -49,6 +50,19 @@ public final class CompetitionInfo {
     public static void setCompetitionType(String cType){
         CompetitionType = cType;
     }
+    private static Tournament getCompetition(){
+        return switch (getCompetitionType()){
+          case "Regular" -> new RegularTournament();
+          case "Courier" -> new CourierTournament();
+          default -> null;
+        };
+    }
+    public static void createCompetition(){
+        competition = getCompetition();
+    }
+    public static void startCompetition(){
+        competition.upFlag();
+    }
     public static void dynamicPosition(Animal animal){
         Point p;
         if ("Terrestrial".equals(getCategory())) {
@@ -63,8 +77,8 @@ public final class CompetitionInfo {
 
     public static Point getPosition(int group) {
         return switch (getCategory()) {
-            case "Air" -> new Point(0,560* group / MAX_GROUPS);
-            case "Water" -> new Point(20,460* group / MAX_GROUPS +60);
+            case "Air" -> new Point(0,560* (group-1) / MAX_GROUPS);
+            case "Water" -> new Point(20,460* (group-1) / MAX_GROUPS +60);
             case "Terrestrial" -> new Point(0,0);
             default -> new Point();
         };

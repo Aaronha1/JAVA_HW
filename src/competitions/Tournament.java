@@ -13,6 +13,7 @@ public abstract class Tournament {
     }
 
     protected abstract void setup(ArrayList<ArrayList<Animal>> groups);
+    public abstract void upFlag();
 
     public TournamentThread getTournamentThread() {
         return tournamentThread;

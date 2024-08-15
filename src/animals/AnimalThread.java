@@ -1,6 +1,8 @@
 package animals;
 
 
+import competitions.TournamentThread;
+
 public class AnimalThread implements Runnable {
     private final Animal participant;
     private final double neededDistance;

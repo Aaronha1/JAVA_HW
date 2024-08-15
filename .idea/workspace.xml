@@ -4,24 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40cac5b3-4729-421e-ba19-2993eee4f325" name="Changes" comment="update images">
-      <change afterPath="$PROJECT_DIR$/src/animals/AnimalThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/competitions/CourierTournament.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/competitions/Referee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/competitions/RegularTournament.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/competitions/Scores.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/competitions/Tournament.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/competitions/TournamentThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/AddAnimalGroup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/graphics/GroupSelectionDialog.java" afterDir="false" />
+    <list default="true" id="40cac5b3-4729-421e-ba19-2993eee4f325" name="Changes" comment="Before connecting the Threads">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/animals/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/animals/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/animals/AnimalThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/animals/AnimalThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/competitions/CourierTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/CourierTournament.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/competitions/RegularTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/RegularTournament.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/competitions/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/Tournament.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/AddAnimalDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/AddAnimalDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphics/AddCompetitionDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/AddCompetitionDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/CompetitionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/CompetitionInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/CompetitionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/CompetitionPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphics/IDrawable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/IDrawable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/Image.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/ZooPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/ZooPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,11 +103,28 @@
       <option name="project" value="LOCAL" />
       <updated>1721853098623</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Before connecting the Threads">
+      <option name="closed" value="true" />
+      <created>1723721265794</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1723721265795</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Before connecting the Threads">
+      <option name="closed" value="true" />
+      <created>1723734754355</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1723734754355</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update images" />
-    <option name="LAST_COMMIT_MESSAGE" value="update images" />
+    <MESSAGE value="Before connecting the Threads" />
+    <option name="LAST_COMMIT_MESSAGE" value="Before connecting the Threads" />
   </component>
 </project>

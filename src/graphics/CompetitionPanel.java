@@ -1,6 +1,7 @@
 package graphics;
 
 import animals.Animal;
+import competitions.TournamentThread;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,12 +37,13 @@ public class CompetitionPanel extends JPanel {
                 new AddCompetitionDialog(owner);
                 new GroupSelectionDialog(owner);
                 new AddAnimalGroup(owner);
+                CompetitionInfo.createCompetition();;
             }
         });
         button[1].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                CompetitionInfo.startCompetition();
             }
         });
         button[2].addActionListener(new ActionListener() {
