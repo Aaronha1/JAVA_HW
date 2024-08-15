@@ -45,7 +45,7 @@ public class AddAnimalDialog extends JDialog {
         int energyPerMeter = promptForInt("Enter energy per meter:", "Energy per meter must be a positive number.");
         ArrayList<Medal> medals = gatherMedals();
 
-        return new AnimalAttributes(name, gender, weight, speed, medals, id, maxEnergy, energyPerMeter, Orientation.EAST);
+        return new AnimalAttributes(name, gender, weight, speed, medals, id, maxEnergy, energyPerMeter, Orientation.EAST,group);
     }
     private String promptForString(String message, String errorMessage) {
         String input = null;
@@ -258,7 +258,7 @@ public class AddAnimalDialog extends JDialog {
         }
 
         if (animal != null) {
-            CompetitionInfo.addToArr(animal,type,1,1);
+            CompetitionInfo.addToArr(animal,type,group,runner);
             dispose();
         }
 
@@ -274,7 +274,7 @@ public class AddAnimalDialog extends JDialog {
         Point loction;
 
         AnimalAttributes(String name, Gender gender, double weight, int speed, ArrayList<Medal> medals, int id,
-                         int maxEnergy, int energyPerMeter, Orientation orien) {
+                         int maxEnergy, int energyPerMeter, Orientation orien, int group) {
             this.name = name;
             this.gender = gender;
             this.weight = weight;
@@ -284,7 +284,7 @@ public class AddAnimalDialog extends JDialog {
             this.maxEnergy = maxEnergy;
             this.energyPerMeter = energyPerMeter;
             this.orien = orien;
-            this.loction = CompetitionInfo.getPosition(0);
+            this.loction = CompetitionInfo.getPosition(group);
         }
     }
 
