@@ -59,7 +59,7 @@ public class MenuBar extends JPanel {
         menuHelp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(MenuBar.this, "Home Work 2\n GUI",
+                JOptionPane.showMessageDialog(MenuBar.this, "Home Work 3\n GUI",
                         "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         });
