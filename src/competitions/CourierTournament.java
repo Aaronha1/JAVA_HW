@@ -4,26 +4,30 @@ import animals.*;
 import graphics.CompetitionInfo;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CourierTournament extends Tournament {
-    private static Boolean startFlag = true;
-    private static final Scores scores = new Scores();
+    private AtomicBoolean startFlag;
+    private Scores scores;
+
 
     @Override
     protected void setup(ArrayList<ArrayList<Animal>> groups) {
+        scores = new Scores();
+        startFlag = new AtomicBoolean(true);
         int numGroups = groups.size();
-
-        List<Boolean> flags = new ArrayList<>();
+        System.out.println("B: "+startFlag.get());
+        List<AtomicBoolean> flags = new ArrayList<>();
         for (ArrayList<Animal> group : groups){
-            List<Boolean> groupFlags = new ArrayList<>();
+            List<AtomicBoolean> groupFlags = new ArrayList<>();
             for (int i=0; i<group.size(); i++){
-                groupFlags.add(false);
+                groupFlags.add(new AtomicBoolean(false));
             }
             for (int i=0; i<group.size(); i++){
                 Animal animal = group.get(i);
                 double neededDistance = CompetitionInfo.getDistanceNeeded();
-                Boolean startFlagForAnimal = (i == 0) ? startFlag : groupFlags.get(i - 1);
-                Boolean finishFlagForAnimal = groupFlags.get(i);
+                AtomicBoolean startFlagForAnimal = (i == 0) ? startFlag : groupFlags.get(i - 1);
+                AtomicBoolean finishFlagForAnimal = groupFlags.get(i);
                 AnimalThread animalThread = new AnimalThread(animal, neededDistance, startFlagForAnimal, finishFlagForAnimal);
                 new Thread(animalThread).start();
                 if (i == group.size() - 1) {
@@ -35,6 +39,6 @@ public class CourierTournament extends Tournament {
         tournamentThread = new TournamentThread(scores, startFlag, numGroups);
         new Thread(tournamentThread).start();
     }
-    public void upFlag() { startFlag = true; }
-
+    public Boolean getStartFlag(){return startFlag.get();}
+    public void upFlag(){startFlag.set(true);}
 }

@@ -4,17 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40cac5b3-4729-421e-ba19-2993eee4f325" name="Changes" comment="Before connecting the Threads">
+    <list default="true" id="40cac5b3-4729-421e-ba19-2993eee4f325" name="Changes" comment="After connecting the Threads">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/animals/AnimalThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/animals/AnimalThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/competitions/CourierTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/CourierTournament.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/competitions/Referee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/Referee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/competitions/RegularTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/RegularTournament.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/competitions/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/Tournament.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphics/AddAnimalDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/AddAnimalDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/competitions/TournamentThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/TournamentThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/CompetitionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/CompetitionInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/CompetitionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/CompetitionPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/Image.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphics/ZooPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/ZooPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +24,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -119,12 +118,21 @@
       <option name="project" value="LOCAL" />
       <updated>1723734754355</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="After connecting the Threads">
+      <option name="closed" value="true" />
+      <created>1723754956908</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1723754956908</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update images" />
     <MESSAGE value="Before connecting the Threads" />
-    <option name="LAST_COMMIT_MESSAGE" value="Before connecting the Threads" />
+    <MESSAGE value="After connecting the Threads" />
+    <option name="LAST_COMMIT_MESSAGE" value="After connecting the Threads" />
   </component>
 </project>

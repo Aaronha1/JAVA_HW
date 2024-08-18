@@ -1,6 +1,7 @@
 package graphics;
 
 import animals.Animal;
+import competitions.Tournament;
 import competitions.TournamentThread;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 public class CompetitionPanel extends JPanel {
     private JButton[] button;
+    private Tournament competition;
     public CompetitionPanel(){
 
         JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(CompetitionPanel.this);
@@ -37,13 +39,15 @@ public class CompetitionPanel extends JPanel {
                 new AddCompetitionDialog(owner);
                 new GroupSelectionDialog(owner);
                 new AddAnimalGroup(owner);
-                CompetitionInfo.createCompetition();;
+                competition = CompetitionInfo.getCompetition();
+                //CompetitionInfo.createCompetition();
             }
         });
         button[1].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CompetitionInfo.startCompetition();
+                //competition.upFlag();
+                //CompetitionInfo.startCompetition();
             }
         });
         button[2].addActionListener(new ActionListener() {

@@ -1,16 +1,15 @@
 package animals;
 
-
-import competitions.TournamentThread;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AnimalThread implements Runnable {
     private final Animal participant;
     private final double neededDistance;
-    private final Boolean startFlag;
-    private final Boolean finishFlag;
+    private final AtomicBoolean startFlag;
+    private final AtomicBoolean finishFlag;
     private static long SLEEP_TIME = 1000;
 
-    public AnimalThread(Animal participant, double neededDistance, Boolean startFlag, Boolean finishFlag) {
+    public AnimalThread(Animal participant, double neededDistance, AtomicBoolean startFlag, AtomicBoolean finishFlag) {
         this.participant = participant;
         this.neededDistance = neededDistance;
         this.startFlag = startFlag;
@@ -28,33 +27,38 @@ public class AnimalThread implements Runnable {
     }
     @Override
     public void run() {
-        synchronized (startFlag) {
-            try {
-                while (!startFlag) {
-                    startFlag.wait();
-                }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return;
-            }
-        }
-
-
         while (true) {
-            synchronized (participant) {
-                participant.move();
-                if (participant.getTotalDistance() >= neededDistance) {
-                    synchronized (finishFlag) {
-                        finishFlag.notifyAll();
+
+            synchronized (startFlag) {
+                try {
+                    while (!startFlag.get()) {
+                        System.out.println(participant.getAnimalName()+" is waiting");
+                        startFlag.wait();
                     }
-                    break;
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    return;
                 }
             }
 
-            try {
-                Thread.sleep(SLEEP_TIME);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+
+            while (true) {
+                synchronized (participant) {
+                    participant.move();
+                    if (participant.getTotalDistance() >= neededDistance) {
+                        synchronized (finishFlag) {
+                            finishFlag.set(true);
+                            finishFlag.notifyAll();
+                        }
+                        break;
+                    }
+                }
+
+                try {
+                    Thread.sleep(SLEEP_TIME);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
         }
     }

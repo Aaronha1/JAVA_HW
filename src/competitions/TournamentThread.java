@@ -3,13 +3,15 @@ package competitions;
 import graphics.CompetitionInfo;
 
 import  java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class TournamentThread implements Runnable {
     private static Map<String,Date> realtime;
     private final Scores scores;
-    private final Boolean startSignal;
+    private final AtomicBoolean startSignal;
     private final int groups;
 
-    public TournamentThread(Scores scores, Boolean startSignal, int groups) {
+    public TournamentThread(Scores scores, AtomicBoolean startSignal, int groups) {
         this.scores = scores;
         this.startSignal = startSignal;
         this.groups = groups;

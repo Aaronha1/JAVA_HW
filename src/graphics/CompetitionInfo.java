@@ -50,7 +50,7 @@ public final class CompetitionInfo {
     public static void setCompetitionType(String cType){
         CompetitionType = cType;
     }
-    private static Tournament getCompetition(){
+    public static Tournament getCompetition(){
         return switch (getCompetitionType()){
           case "Regular" -> new RegularTournament();
           case "Courier" -> new CourierTournament();
@@ -60,9 +60,7 @@ public final class CompetitionInfo {
     public static void createCompetition(){
         competition = getCompetition();
     }
-    public static void startCompetition(){
-        competition.upFlag();
-    }
+
     public static void dynamicPosition(Animal animal){
         Point p;
         if ("Terrestrial".equals(getCategory())) {
