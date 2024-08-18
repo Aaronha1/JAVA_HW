@@ -32,7 +32,6 @@ public class AnimalThread implements Runnable {
             synchronized (startFlag) {
                 try {
                     while (!startFlag.get()) {
-                        System.out.println(participant.getAnimalName()+" is waiting");
                         startFlag.wait();
                     }
                 } catch (InterruptedException e) {
@@ -48,18 +47,21 @@ public class AnimalThread implements Runnable {
                     if (participant.getTotalDistance() >= neededDistance) {
                         synchronized (finishFlag) {
                             finishFlag.set(true);
-                            finishFlag.notifyAll();
                         }
                         break;
                     }
                 }
 
                 try {
-                    Thread.sleep(SLEEP_TIME);
+                    Thread.sleep(getSleepTime());
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
             }
+            synchronized (finishFlag){
+                finishFlag.notifyAll();
+            }
+            break;
         }
     }
 }
