@@ -7,23 +7,12 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RegularTournament extends Tournament {
-    private AtomicBoolean startFlag;
-    private final Scores scores = new Scores();
-    private static final RegularTournament instance = new RegularTournament(5);
-
-    public RegularTournament(){    }
-    private RegularTournament(int k){
-        this.startFlag = new AtomicBoolean(false);
-    }
-
-    public static synchronized RegularTournament getInstance() {
-        return instance;
-    }
+    private static final AtomicBoolean startFlag = new AtomicBoolean(false);
+    private Scores scores;
 
     @Override
     protected void setup(ArrayList<ArrayList<Animal>> groups) {
-
-
+        scores = new Scores();
         int numGroups = groups.size();
 
         for (ArrayList<Animal> group : groups) {
@@ -31,15 +20,20 @@ public class RegularTournament extends Tournament {
                 AtomicBoolean finishFlag = new AtomicBoolean(false);
                 double neededDistance = CompetitionInfo.getDistanceNeeded() * 2;
 
-                AnimalThread animalThread = new AnimalThread(animal, neededDistance, getInstance().startFlag, finishFlag);
+                AnimalThread animalThread = new AnimalThread(animal, neededDistance, startFlag, finishFlag);
                 new Thread(animalThread).start();
 
-                Referee referee = new Referee(animal.getAnimalName(), getInstance().scores,finishFlag);
+                Referee referee = new Referee(animal.getAnimalName(), scores,finishFlag);
                 new Thread(referee).start();
             }
         }
-        tournamentThread = new TournamentThread(getInstance().scores, getInstance().startFlag, numGroups);
+        tournamentThread = new TournamentThread(scores, startFlag, numGroups);
         new Thread(tournamentThread).start();
     }
-    public void upFlag(){startFlag.set(true);}
+    public void upFlag(){
+        synchronized (startFlag) {
+            startFlag.set(true);
+            startFlag.notifyAll();
+        }
+    }
 }

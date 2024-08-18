@@ -46,7 +46,7 @@ public class CompetitionPanel extends JPanel {
         button[1].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //competition.upFlag();
+                competition.upFlag();
                 //CompetitionInfo.startCompetition();
             }
         });
