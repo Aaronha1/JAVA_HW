@@ -36,8 +36,12 @@ public final class CompetitionInfo {
     }
 
     public static void addToArr(Animal animal, String type,int group,int runner) {
-        if (runner == 2) dynamicPosition(animal);
-        allAnimals.add(new CompetitionInfo(animal, type,group,runner));
+        if (runner == 2) {
+            dynamicPosition(animal);
+            allAnimals.add(new CompetitionInfo(animal, type,group,runner));
+        } else {
+            allAnimals.add(0, new CompetitionInfo(animal, type,group,runner));
+        }
     }
 
     public static int getMaxGroups(){ return MAX_GROUPS; }

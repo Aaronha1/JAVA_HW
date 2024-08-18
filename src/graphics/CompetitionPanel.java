@@ -1,14 +1,11 @@
 package graphics;
 
-import animals.Animal;
 import competitions.Tournament;
-import competitions.TournamentThread;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class CompetitionPanel extends JPanel {
     private JButton[] button;
@@ -19,7 +16,7 @@ public class CompetitionPanel extends JPanel {
         button = new JButton[7];
 
         setLayout(new GridLayout(1,7));
-        button[0] = new JButton("Add Competition");
+        button[0] = new JButton("New Competition");
         button[1] = new JButton("Start");
         button[2] = new JButton("Scores");
         button[3] = new JButton("Clear");
