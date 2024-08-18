@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class CompetitionPanel extends JPanel {
     private JButton[] button;
-    private Tournament competition;
+    private Tournament competition = null;
     public CompetitionPanel(){
 
         JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(CompetitionPanel.this);
@@ -40,14 +40,14 @@ public class CompetitionPanel extends JPanel {
                 new GroupSelectionDialog(owner);
                 new AddAnimalGroup(owner);
                 competition = CompetitionInfo.getCompetition();
-                //CompetitionInfo.createCompetition();
             }
         });
         button[1].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                competition.upFlag();
-                //CompetitionInfo.startCompetition();
+                if (competition != null) {
+                    competition.upFlag();
+                }
             }
         });
         button[2].addActionListener(new ActionListener() {

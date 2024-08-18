@@ -25,7 +25,6 @@ public final class CompetitionInfo {
     private boolean display;
     private int group;
     private int runner;
-    private static Tournament competition;
 
     private CompetitionInfo(Animal animal, String type,int group,int runner){
         this.animal = animal;
@@ -56,9 +55,6 @@ public final class CompetitionInfo {
           case "Courier" -> new CourierTournament();
           default -> null;
         };
-    }
-    public static void createCompetition(){
-        competition = getCompetition();
     }
 
     public static void dynamicPosition(Animal animal){
@@ -144,7 +140,7 @@ public final class CompetitionInfo {
         JFrame frame = new JFrame("Competition Scores");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(scrollPane);
-        frame.setSize(300, 300);
+        frame.setSize(350, 300);
         frame.setVisible(true);
     }
     public static String getCategory() {

@@ -14,6 +14,7 @@ public class CourierTournament extends Tournament {
     @Override
     protected void setup(ArrayList<ArrayList<Animal>> groups) {
         scores = new Scores();
+        startFlag.set(false);
         int numGroups = groups.size();
 
         for (ArrayList<Animal> group : groups){

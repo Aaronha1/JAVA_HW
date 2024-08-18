@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40cac5b3-4729-421e-ba19-2993eee4f325" name="Changes" comment="After connecting the Threads">
+    <list default="true" id="40cac5b3-4729-421e-ba19-2993eee4f325" name="Changes" comment="Fix finish location">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/animals/AnimalThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/animals/AnimalThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/competitions/CourierTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/CourierTournament.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/competitions/Referee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/Referee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/competitions/RegularTournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/RegularTournament.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/competitions/TournamentThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/competitions/TournamentThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/AddAnimalGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/AddAnimalGroup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/CompetitionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/CompetitionInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/CompetitionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/CompetitionPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/Image.java" beforeDir="false" />
@@ -126,13 +125,40 @@
       <option name="project" value="LOCAL" />
       <updated>1723754956908</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fix animal's flags">
+      <option name="closed" value="true" />
+      <created>1723972853994</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1723972853994</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Fix start flag">
+      <option name="closed" value="true" />
+      <created>1723974296500</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1723974296500</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Fix finish location">
+      <option name="closed" value="true" />
+      <created>1723975413174</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1723975413174</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update images" />
     <MESSAGE value="Before connecting the Threads" />
     <MESSAGE value="After connecting the Threads" />
-    <option name="LAST_COMMIT_MESSAGE" value="After connecting the Threads" />
+    <MESSAGE value="Fix animal's flags" />
+    <MESSAGE value="Fix start flag" />
+    <MESSAGE value="Fix finish location" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix finish location" />
   </component>
 </project>

@@ -20,25 +20,25 @@ public class AddAnimalGroup extends JDialog {
         this.competitionType = CompetitionInfo.getCompetitionType();
         this.totalButtons = "Regular".equals(competitionType) ? groups : groups * 2;
         this.clickedButtons = 0;
-        int col = "Regular".equals(competitionType) ? 2:3;
+        int rows = "Regular".equals(competitionType) ? 2:3;
 
 
-        setLayout(new GridLayout(col, groups + 1));
+        setLayout(new GridLayout(rows, groups + 1));
 
         addButtons = new JButton[2][groups];
 
-        // Create headers for each group
         for (int i = 1; i <= groups; i++) {
             add(new JLabel("Group " + i, JLabel.CENTER));
         }
 
-        // Create Add buttons according to the competition type
         for (int i = 0; i < groups; i++) {
             addButtons[0][i] = new JButton("Add Animal");
             addButtons[0][i].addActionListener(new AddAnimalAction(i, 0));
             add(addButtons[0][i]);
+        }
 
-            if (!"Regular".equals(competitionType)) {
+        if (!"Regular".equals(competitionType)) {
+            for (int i = 0; i < groups; i++) {
                 addButtons[1][i] = new JButton("Add Animal 2");
                 addButtons[1][i].addActionListener(new AddAnimalAction(i, 1));
                 add(addButtons[1][i]);

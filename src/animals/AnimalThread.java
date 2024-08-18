@@ -27,41 +27,34 @@ public class AnimalThread implements Runnable {
     }
     @Override
     public void run() {
+        synchronized (startFlag) {
+            try {
+                while (!startFlag.get()) {
+                    startFlag.wait();
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+        }
+
         while (true) {
-
-            synchronized (startFlag) {
-                try {
-                    while (!startFlag.get()) {
-                        startFlag.wait();
-                    }
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    return;
+            synchronized (participant) {
+                participant.move();
+                if (participant.getTotalDistance() >= neededDistance) {
+                    break;
                 }
             }
 
-
-            while (true) {
-                synchronized (participant) {
-                    participant.move();
-                    if (participant.getTotalDistance() >= neededDistance) {
-                        synchronized (finishFlag) {
-                            finishFlag.set(true);
-                        }
-                        break;
-                    }
-                }
-
-                try {
-                    Thread.sleep(getSleepTime());
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
+            try {
+                Thread.sleep(getSleepTime());
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
-            synchronized (finishFlag){
-                finishFlag.notifyAll();
-            }
-            break;
+        }
+        synchronized (finishFlag){
+            finishFlag.set(true);
+            finishFlag.notifyAll();
         }
     }
 }
